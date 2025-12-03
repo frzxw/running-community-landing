@@ -64,14 +64,14 @@ const Hero = () => {
       {/* Text Content */}
       <div className="relative z-10 container mx-auto px-4 flex flex-col items-center justify-center h-full pointer-events-none">
         <motion.div 
-          initial={{ opacity: 0, scale: 0.8, filter: "blur(10px)" }}
-          animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
-          className="text-left relative mix-blend-difference w-full"
+          className="text-left relative w-full"
         >
           <motion.h1 
             style={{ x: moveX, y: moveY }}
-            className="text-3xl md:text-7xl lg:text-9xl leading-[0.8] font-['Syne'] font-black text-white tracking-tighter select-none uppercase italic drop-shadow-[0_0_30px_rgba(255,255,255,0.3)]"
+            className="text-3xl md:text-7xl lg:text-9xl leading-[0.8] font-['Syne'] font-black text-white tracking-tighter select-none uppercase italic drop-shadow-[0_0_30px_rgba(0,0,0,0.8)]"
           >
             RUN TOGETHER.<br/>SWEAT TOGETHER.
           </motion.h1>
@@ -80,8 +80,8 @@ const Hero = () => {
 
 
       <div className="absolute bottom-10 left-10 flex items-center gap-4">
-        <div className="w-2 h-2 bg-white rounded-full animate-ping" aria-hidden="true" />
-        <span className="font-['Syne'] text-xs uppercase tracking-widest text-white/60">Scroll to join the crew</span>
+        <div className="w-2 h-2 bg-white rounded-full" aria-hidden="true" />
+        <span className="font-['Syne'] text-xs uppercase tracking-widest text-zinc-400">Scroll to join the crew</span>
       </div>
     </section>
   );
@@ -113,7 +113,7 @@ const Manifesto = () => {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
           <div className="col-span-1 md:col-span-4 md:sticky md:top-32">
              <Reveal delay={0.2}>
-               <h2 className="text-white/40 font-['Syne'] uppercase tracking-widest text-sm mb-4">The Creed</h2>
+               <h2 className="text-zinc-400 font-['Syne'] uppercase tracking-widest text-sm mb-4">The Creed</h2>
                <div className="w-full h-[1px] bg-white/20 mb-8" aria-hidden="true" />
                <p className="font-['Syne'] text-xl text-white leading-relaxed">
                  Sun up or sun down. Rain or shine. Concrete is our sanctuary.
@@ -159,8 +159,8 @@ const Manifesto = () => {
         </div>
       </div>
       
-      {/* Decorative elements */}
-      <div className="absolute top-1/3 -right-24 w-96 h-96 bg-gradient-to-b from-zinc-800 to-transparent rounded-full blur-3xl opacity-10 animate-pulse" aria-hidden="true" />
+      {/* Decorative elements - static for better performance */}
+      <div className="absolute top-1/3 -right-24 w-96 h-96 bg-gradient-to-b from-zinc-800 to-transparent rounded-full blur-3xl opacity-10" aria-hidden="true" />
     </section>
   );
 };
@@ -203,7 +203,7 @@ const FeatureCard = ({ title, img, index }: { title: string, img: string, index:
           >
             {title}
           </motion.h3>
-          <span className="font-['Syne'] text-xs text-white/60 uppercase tracking-widest" aria-hidden="true">0{index + 1} // Explore</span>
+          <span className="font-['Syne'] text-xs text-zinc-400 uppercase tracking-widest" aria-hidden="true">0{index + 1} // Explore</span>
         </div>
       </div>
     </motion.article>
@@ -220,7 +220,7 @@ const Gallery = () => {
             <h2 className="sr-only">Galeri Visual Komunitas Lari Bandung - Visuals Gallery</h2>
             <TextReveal text="VISUALS" className="text-5xl md:text-9xl font-['Syne'] font-black uppercase text-white leading-none tracking-tighter" />
           </div>
-          <div className="hidden md:block font-['Syne'] text-white/50 text-right max-w-xs text-sm">
+          <div className="hidden md:block font-['Syne'] text-zinc-400 text-right max-w-xs text-sm">
              <Reveal delay={0.3}>
               <p>RAW ENERGY. <br/> CAPTURED ON THE STREETS.</p>
             </Reveal>

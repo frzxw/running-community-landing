@@ -1,17 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Menu, X } from 'lucide-react';
 
-// Page Components
+// Critical page - loaded immediately
 import Home from './components/pages/Home';
-import Crew from './components/pages/Crew';
-import Coach from './components/pages/Coach';
-import Collection from './components/pages/Collection';
-import Events from './components/pages/Events';
-import Services from './components/pages/Services';
-import Stories from './components/pages/Stories';
-import Privacy from './components/pages/Privacy';
-import Terms from './components/pages/Terms';
+
+// Lazy-loaded pages for better initial load performance
+const Crew = lazy(() => import('./components/pages/Crew'));
+const Coach = lazy(() => import('./components/pages/Coach'));
+const Collection = lazy(() => import('./components/pages/Collection'));
+const Events = lazy(() => import('./components/pages/Events'));
+const Services = lazy(() => import('./components/pages/Services'));
+const Stories = lazy(() => import('./components/pages/Stories'));
+const Privacy = lazy(() => import('./components/pages/Privacy'));
+const Terms = lazy(() => import('./components/pages/Terms'));
+
+// Loading fallback component
+const PageLoader = () => (
+  <div className="min-h-screen bg-black flex items-center justify-center">
+    <div className="w-8 h-8 border-2 border-white/20 border-t-white rounded-full animate-spin" />
+  </div>
+);
 
 const SmoothScroll = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -25,7 +34,7 @@ const Navigation = ({ page, setPage }: { page: string, setPage: (p: string) => v
   const [isOpen, setIsOpen] = React.useState(false);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 px-6 py-6 mix-blend-difference">
+    <header className="fixed top-0 left-0 right-0 z-50 px-6 py-6 bg-gradient-to-b from-black/60 to-transparent">
       {/* SEO: komunitas lari bandung, komunitas lari indonesia navigation */}
       <nav className="flex justify-between items-center max-w-7xl mx-auto" aria-label="Navigasi utama komunitas lari Bandung - Main navigation">
         <a 
@@ -137,7 +146,7 @@ const Footer = ({ setPage }: { setPage: (p: string) => void }) => {
         
         <nav className="grid grid-cols-2 gap-16 font-['Syne'] uppercase text-sm tracking-widest" aria-label="Footer navigation">
           <div className="flex flex-col gap-4">
-            <span className="text-white/40 mb-2">Explore</span>
+            <span className="text-zinc-400 mb-2">Explore</span>
             <button onClick={() => setPage('crew')} className="text-left hover:underline hover:text-zinc-300 transition-colors" title="Anggota komunitas lari Bandung">Crew</button>
             <button onClick={() => setPage('coach')} className="text-left hover:underline hover:text-zinc-300 transition-colors" title="Pelatih les privat olahraga Bandung">Coach</button>
             <button onClick={() => setPage('collection')} className="text-left hover:underline hover:text-zinc-300 transition-colors" title="Koleksi merchandise komunitas lari">Shop</button>
@@ -146,14 +155,14 @@ const Footer = ({ setPage }: { setPage: (p: string) => void }) => {
             <button onClick={() => setPage('stories')} className="text-left hover:underline hover:text-zinc-300 transition-colors" title="Cerita komunitas lari Indonesia">Stories</button>
           </div>
           <div className="flex flex-col gap-4">
-            <span className="text-white/40 mb-2">Legal</span>
+            <span className="text-zinc-400 mb-2">Legal</span>
             <button onClick={() => setPage('privacy')} className="text-left hover:underline hover:text-zinc-300 transition-colors">Privacy</button>
             <button onClick={() => setPage('terms')} className="text-left hover:underline hover:text-zinc-300 transition-colors">Terms</button>
           </div>
         </nav>
       </div>
       <div className="mt-24 flex flex-col md:flex-row justify-between items-end gap-8 border-t border-white/10 pt-8">
-        <div className="font-['Syne'] text-xs text-white/20 uppercase tracking-[0.2em]">
+        <div className="font-['Syne'] text-xs text-zinc-500 uppercase tracking-[0.2em]">
           © 2025 Runtastic Community. Komunitas Lari Bandung Indonesia.
         </div>
         <div className="text-xl md:text-2xl font-['Pirata_One'] text-white uppercase">
@@ -240,14 +249,16 @@ export default function App() {
             transition={{ duration: 0.5 }}
           >
             {page === 'home' && <Home />}
-            {page === 'crew' && <Crew />}
-            {page === 'coach' && <Coach />}
-            {page === 'collection' && <Collection />}
-            {page === 'events' && <Events />}
-            {page === 'services' && <Services />}
-            {page === 'stories' && <Stories />}
-            {page === 'privacy' && <Privacy />}
-            {page === 'terms' && <Terms />}
+            <Suspense fallback={<PageLoader />}>
+              {page === 'crew' && <Crew />}
+              {page === 'coach' && <Coach />}
+              {page === 'collection' && <Collection />}
+              {page === 'events' && <Events />}
+              {page === 'services' && <Services />}
+              {page === 'stories' && <Stories />}
+              {page === 'privacy' && <Privacy />}
+              {page === 'terms' && <Terms />}
+            </Suspense>
           </motion.div>
         </AnimatePresence>
       </main>

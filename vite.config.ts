@@ -55,19 +55,29 @@ export default defineConfig({
     minify: 'esbuild',
     cssMinify: true,
     sourcemap: false,
-    // Code splitting for better caching
+    // Code splitting for better caching and smaller initial bundle
     rollupOptions: {
       output: {
-        manualChunks: {
-          // Vendor chunks for better caching
-          'vendor-react': ['react', 'react-dom'],
-          'vendor-motion': ['motion'],
-          'vendor-radix': [
-            '@radix-ui/react-slot',
-            '@radix-ui/react-dialog',
-            '@radix-ui/react-dropdown-menu',
-          ],
-          'vendor-icons': ['lucide-react'],
+        manualChunks(id) {
+          // Split React into its own chunk
+          if (id.includes('node_modules/react-dom')) {
+            return 'vendor-react-dom';
+          }
+          if (id.includes('node_modules/react')) {
+            return 'vendor-react';
+          }
+          // Motion library in separate chunk
+          if (id.includes('node_modules/motion') || id.includes('node_modules/framer-motion')) {
+            return 'vendor-motion';
+          }
+          // Lucide icons - only load what's needed
+          if (id.includes('node_modules/lucide-react')) {
+            return 'vendor-icons';
+          }
+          // Radix UI components
+          if (id.includes('node_modules/@radix-ui')) {
+            return 'vendor-radix';
+          }
         },
         // Optimize chunk file names for caching
         chunkFileNames: 'assets/[name]-[hash].js',
@@ -76,9 +86,13 @@ export default defineConfig({
       },
     },
     // Increase chunk size warning limit
-    chunkSizeWarningLimit: 1000,
+    chunkSizeWarningLimit: 500,
     // Enable CSS code splitting
     cssCodeSplit: true,
+    // Reduce initial JS size
+    modulePreload: {
+      polyfill: false, // Modern browsers support modulepreload natively
+    },
   },
   // Optimize dependencies
   optimizeDeps: {
