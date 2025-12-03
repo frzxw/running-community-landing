@@ -64,8 +64,8 @@ const Hero = () => {
       {/* Text Content */}
       <div className="relative z-10 container mx-auto px-4 flex flex-col items-center justify-center h-full pointer-events-none">
         <motion.div 
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
+          initial={{ opacity: 0, scale: 0.8, x: 40}}
+          animate={{ opacity: 1, scale: 1}}
           transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
           className="text-left relative w-full"
         >
@@ -80,7 +80,7 @@ const Hero = () => {
 
 
       <div className="absolute bottom-10 left-10 flex items-center gap-4">
-        <div className="w-2 h-2 bg-white rounded-full" aria-hidden="true" />
+        <div className="w-2 h-2 bg-white rounded-full animate-ping" aria-hidden="true" />
         <span className="font-['Syne'] text-xs uppercase tracking-widest text-zinc-400">Scroll to join the crew</span>
       </div>
     </section>

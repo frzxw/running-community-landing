@@ -34,16 +34,22 @@ const Navigation = ({ page, setPage }: { page: string, setPage: (p: string) => v
   const [isOpen, setIsOpen] = React.useState(false);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 px-6 py-6 bg-gradient-to-b from-black/60 to-transparent">
+    <header className="fixed top-0 left-0 right-0 z-50 px-6 py-6 mix-blend-difference">
       {/* SEO: komunitas lari bandung, komunitas lari indonesia navigation */}
-      <nav className="flex justify-between items-center max-w-7xl mx-auto" aria-label="Navigasi utama komunitas lari Bandung - Main navigation">
+      <nav className="flex justify-between items-center max-w-7xl mx-auto pointer-events-auto" aria-label="Navigasi utama komunitas lari Bandung - Main navigation">
         <a 
           href="#"
           onClick={(e) => { e.preventDefault(); setPage('home'); }}
-          className="text-2xl font-bold tracking-tighter font-['Syne'] text-white uppercase cursor-pointer hover:scale-105 transition-transform"
+          className="flex items-center gap-2 text-2xl font-bold tracking-tighter font-['Syne'] text-white uppercase cursor-pointer hover:scale-105 transition-transform"
           aria-label="Runtastic - Komunitas Lari Bandung Indonesia - Go to homepage"
           title="Runtastic komunitas lari terdekat Bandung"
         >
+          <img 
+            src="/logo.png" 
+            alt="Runtastic Logo" 
+            className="h-6 w-auto mix-blend-difference"
+            aria-hidden="true"
+          />
           Runtastic <span className="text-xs align-top opacity-50" aria-hidden="true">®</span>
         </a>
         
@@ -127,7 +133,7 @@ const Footer = ({ setPage }: { setPage: (p: string) => void }) => {
           <div className="flex gap-6">
              <a 
                href="#" 
-               className="font-['Syne'] uppercase text-sm tracking-widest hover:text-zinc-400 transition-colors flex items-center gap-2 group"
+               className="font-['Syne'] uppercase text-sm tracking-widest text-white hover:text-zinc-300 transition-colors flex items-center gap-2 group"
                aria-label="Instagram komunitas lari Bandung"
                title="Follow komunitas lari Bandung di Instagram"
              >
@@ -135,7 +141,7 @@ const Footer = ({ setPage }: { setPage: (p: string) => void }) => {
              </a>
              <a 
                href="#" 
-               className="font-['Syne'] uppercase text-sm tracking-widest hover:text-zinc-400 transition-colors flex items-center gap-2 group"
+               className="font-['Syne'] uppercase text-sm tracking-widest text-white hover:text-zinc-300 transition-colors flex items-center gap-2 group"
                aria-label="TikTok komunitas lari Indonesia"
                title="Follow komunitas lari Indonesia di TikTok"
              >
@@ -146,25 +152,25 @@ const Footer = ({ setPage }: { setPage: (p: string) => void }) => {
         
         <nav className="grid grid-cols-2 gap-16 font-['Syne'] uppercase text-sm tracking-widest" aria-label="Footer navigation">
           <div className="flex flex-col gap-4">
-            <span className="text-zinc-400 mb-2">Explore</span>
-            <button onClick={() => setPage('crew')} className="text-left hover:underline hover:text-zinc-300 transition-colors" title="Anggota komunitas lari Bandung">Crew</button>
-            <button onClick={() => setPage('coach')} className="text-left hover:underline hover:text-zinc-300 transition-colors" title="Pelatih les privat olahraga Bandung">Coach</button>
-            <button onClick={() => setPage('collection')} className="text-left hover:underline hover:text-zinc-300 transition-colors" title="Koleksi merchandise komunitas lari">Shop</button>
-            <button onClick={() => setPage('events')} className="text-left hover:underline hover:text-zinc-300 transition-colors" title="Event lari fun run night run easy run Bandung">Events</button>
-            <button onClick={() => setPage('services')} className="text-left hover:underline hover:text-zinc-300 transition-colors" title="Les privat renang, padel, tenis, bola, futsal, lari, atletik">Services</button>
-            <button onClick={() => setPage('stories')} className="text-left hover:underline hover:text-zinc-300 transition-colors" title="Cerita komunitas lari Indonesia">Stories</button>
+            <span className="text-zinc-300 mb-2">Explore</span>
+            <button onClick={() => setPage('crew')} className="text-left text-white hover:underline hover:text-zinc-200 transition-colors" title="Anggota komunitas lari Bandung">Crew</button>
+            <button onClick={() => setPage('coach')} className="text-left text-white hover:underline hover:text-zinc-200 transition-colors" title="Pelatih les privat olahraga Bandung">Coach</button>
+            <button onClick={() => setPage('collection')} className="text-left text-white hover:underline hover:text-zinc-200 transition-colors" title="Koleksi merchandise komunitas lari">Shop</button>
+            <button onClick={() => setPage('events')} className="text-left text-white hover:underline hover:text-zinc-200 transition-colors" title="Event lari fun run night run easy run Bandung">Events</button>
+            <button onClick={() => setPage('services')} className="text-left text-white hover:underline hover:text-zinc-200 transition-colors" title="Les privat renang, padel, tenis, bola, futsal, lari, atletik">Services</button>
+            <button onClick={() => setPage('stories')} className="text-left text-white hover:underline hover:text-zinc-200 transition-colors" title="Cerita komunitas lari Indonesia">Stories</button>
           </div>
           <div className="flex flex-col gap-4">
-            <span className="text-zinc-400 mb-2">Legal</span>
-            <button onClick={() => setPage('privacy')} className="text-left hover:underline hover:text-zinc-300 transition-colors">Privacy</button>
-            <button onClick={() => setPage('terms')} className="text-left hover:underline hover:text-zinc-300 transition-colors">Terms</button>
+            <span className="text-zinc-300 mb-2">Legal</span>
+            <button onClick={() => setPage('privacy')} className="text-left text-white hover:underline hover:text-zinc-200 transition-colors">Privacy</button>
+            <button onClick={() => setPage('terms')} className="text-left text-white hover:underline hover:text-zinc-200 transition-colors">Terms</button>
           </div>
         </nav>
       </div>
       <div className="mt-24 flex flex-col md:flex-row justify-between items-end gap-8 border-t border-white/10 pt-8">
-        <div className="font-['Syne'] text-xs text-zinc-500 uppercase tracking-[0.2em]">
-          © 2025 Runtastic Community. Komunitas Lari Bandung Indonesia.
-        </div>
+        <button onClick={() => window.open('https://laksana.dev', '_blank')} className="font-['Syne'] text-xs text-zinc-300 uppercase tracking-[0.2em]">
+          © 2025 Laksana Dev.
+        </button>
         <div className="text-xl md:text-2xl font-['Pirata_One'] text-white uppercase">
           RUN TOGETHER. SWEAT TOGETHER.
         </div>
