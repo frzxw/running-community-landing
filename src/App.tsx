@@ -180,7 +180,37 @@ const Footer = ({ setPage }: { setPage: (p: string) => void }) => {
 };
 
 export default function App() {
-  const [page, setPage] = useState('home');
+  // Initialize page from URL or default to 'home'
+  const getPageFromUrl = () => {
+    const path = window.location.pathname;
+    if (path === '/' || path === '') return 'home';
+    // Remove leading slash and return the page name
+    const pageName = path.slice(1).toLowerCase();
+    // Validate page name exists
+    const validPages = ['home', 'crew', 'coach', 'collection', 'events', 'services', 'stories', 'privacy', 'terms'];
+    return validPages.includes(pageName) ? pageName : 'home';
+  };
+
+  const [page, setPage] = useState(getPageFromUrl());
+
+  // Update URL when page changes
+  useEffect(() => {
+    const newPath = page === 'home' ? '/' : `/${page}`;
+    if (window.location.pathname !== newPath) {
+      window.history.pushState({ page }, '', newPath);
+    }
+  }, [page]);
+
+  // Handle browser back/forward buttons
+  useEffect(() => {
+    const handlePopState = (event: PopStateEvent) => {
+      const newPage = event.state?.page || getPageFromUrl();
+      setPage(newPage);
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
 
   // Scroll to top on page change
   useEffect(() => {
