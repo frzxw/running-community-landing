@@ -1,0 +1,27 @@
+# Robots.txt for Runtastic - Komunitas Lari Bandung Indonesia
+# https://runtastic.id/
+
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://runtastic.id/sitemap.xml
+
+# Crawl-delay for politeness
+Crawl-delay: 1
+
+# Allow Google and Bing to index everything
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Block access to sensitive directories (if any)
+Disallow: /api/
+Disallow: /admin/
+
+# SEO Keywords Reference (for documentation):
+# komunitas lari, komunitas lari terdekat, komunitas lari bandung, komunitas lari indonesia
+# les privat renang, les privat padel, les privat tenis, les privat bola, les privat futsal, les privat lari, les privat atletik
+# fun run, night run, easy run, event lari

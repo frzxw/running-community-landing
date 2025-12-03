@@ -1,22 +1,49 @@
 {
-  "name": "Runtastic - Run Together. Sweat Together.",
+  "name": "Runtastic - Komunitas Lari Bandung Indonesia | Les Privat Olahraga",
   "short_name": "Runtastic",
-  "description": "Urban running community that thrives in the streets.",
+  "description": "Komunitas lari terdekat di Bandung Indonesia. Event lari: fun run, night run, easy run. Les privat: renang, padel, tenis, bola, futsal, lari, atletik.",
+  "lang": "id",
+  "dir": "ltr",
+  "categories": ["sports", "fitness", "health", "lifestyle"],
   "icons": [
     {
       "src": "/android-chrome-192x192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
       "src": "/android-chrome-512x512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ],
   "theme_color": "#000000",
   "background_color": "#000000",
   "display": "standalone",
+  "orientation": "portrait-primary",
   "start_url": "/",
-  "scope": "/"
+  "scope": "/",
+  "id": "runtastic-komunitas-lari-bandung",
+  "shortcuts": [
+    {
+      "name": "Events - Fun Run, Night Run, Easy Run",
+      "short_name": "Events",
+      "description": "Event lari komunitas lari Bandung",
+      "url": "/?page=events"
+    },
+    {
+      "name": "Services - Les Privat Olahraga",
+      "short_name": "Services",
+      "description": "Les privat renang, padel, tenis, bola, futsal, lari, atletik",
+      "url": "/?page=services"
+    },
+    {
+      "name": "Coach - Pelatih Les Privat",
+      "short_name": "Coach",
+      "description": "Pelatih profesional les privat olahraga Bandung",
+      "url": "/?page=coach"
+    }
+  ]
 }

@@ -41,8 +41,9 @@ const Hero = () => {
   const moveYInverse = useSpring(useTransform(new MotionValue(y), [0, window.innerHeight], [30, -30]), { stiffness: 30, damping: 30 });
 
   return (
-    <section className="relative h-screen w-full overflow-hidden bg-black flex items-center justify-center perspective-1000" aria-label="Hero section">
+    <section className="relative h-screen w-full overflow-hidden bg-black flex items-center justify-center perspective-1000" aria-label="Komunitas lari Bandung Indonesia - Hero section">
       {/* Background Textures - Now using a Day/Mixed shot for broader appeal */}
+      {/* SEO: Komunitas lari bandung, komunitas lari terdekat, running community indonesia */}
       <motion.div 
         style={{ x: moveXInverse, y: moveYInverse, scale: 1.15 }}
         className="absolute inset-0 opacity-50"
@@ -50,8 +51,8 @@ const Hero = () => {
          <img 
            src={IMAGES.hero_bg} 
            className="w-full h-full object-cover grayscale contrast-125" 
-           alt="" 
-           aria-hidden="true"
+           alt="Komunitas lari Bandung Indonesia - pelari sprint di jalan kota" 
+           title="Komunitas lari terdekat Bandung - urban running community"
            fetchPriority="high"
            decoding="async"
            width={1080}
@@ -106,7 +107,8 @@ const Marquee = ({ text, direction = 1 }: { text: string, direction?: number }) 
 
 const Manifesto = () => {
   return (
-    <section className="min-h-screen bg-black py-32 px-4 relative overflow-hidden" aria-label="Our manifesto">
+    <section className="min-h-screen bg-black py-32 px-4 relative overflow-hidden" aria-label="Manifesto komunitas lari Bandung - Our creed">
+      {/* SEO: komunitas lari indonesia, komunitas lari terdekat */}
       <div className="max-w-6xl mx-auto relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
           <div className="col-span-1 md:col-span-4 md:sticky md:top-32">
@@ -144,7 +146,8 @@ const Manifesto = () => {
               <a 
                 href="#join" 
                 className="flex gap-8 mt-24 items-center group cursor-pointer hover:translate-x-4 transition-transform duration-300"
-                aria-label="Join the Runtastic movement"
+                aria-label="Gabung komunitas lari Bandung - Join the Runtastic movement"
+                title="Gabung komunitas lari terdekat di Bandung Indonesia"
               >
                 <div className="w-16 h-16 border border-white rounded-full flex items-center justify-center group-hover:bg-white group-hover:text-black transition-colors duration-300" aria-hidden="true">
                   <ArrowRight className="w-6 h-6" />
@@ -162,7 +165,18 @@ const Manifesto = () => {
   );
 };
 
+// Indonesian alt text mapping for SEO
+// Keywords: komunitas lari, komunitas lari terdekat, komunitas lari bandung, komunitas lari indonesia, fun run, night run, easy run, event lari
+const INDONESIAN_ALT_TEXT: { [key: string]: string } = {
+  "Night Crawlers": "Night run komunitas lari Bandung - event lari malam Indonesia",
+  "Day Breakers": "Easy run komunitas lari Bandung - event lari pagi Indonesia",
+  "Crew Love": "Komunitas lari terdekat Bandung Indonesia - running community",
+  "Impact": "Fun run komunitas lari Bandung - event lari Indonesia"
+};
+
 const FeatureCard = ({ title, img, index }: { title: string, img: string, index: number }) => {
+  const indonesianAlt = INDONESIAN_ALT_TEXT[title] || `Komunitas lari ${title} - Runtastic Bandung Indonesia`;
+  
   return (
     <motion.article 
       initial={{ opacity: 0, y: 50 }}
@@ -173,7 +187,11 @@ const FeatureCard = ({ title, img, index }: { title: string, img: string, index:
     >
       <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/90 z-20 pointer-events-none" aria-hidden="true" />
       
-      <ParallaxImage src={img} alt={`Runtastic ${title} - Running community photo`} className="w-full h-full grayscale group-hover:grayscale-0 transition-all duration-700" />
+      <ParallaxImage 
+        src={img} 
+        alt={indonesianAlt}
+        className="w-full h-full grayscale group-hover:grayscale-0 transition-all duration-700" 
+      />
       
       <div className="absolute bottom-0 left-0 right-0 p-4 md:p-8 z-30">
         <div className="flex justify-between items-end border-t border-white/20 pt-6 overflow-hidden">
@@ -194,11 +212,12 @@ const FeatureCard = ({ title, img, index }: { title: string, img: string, index:
 
 const Gallery = () => {
   return (
-    <section className="bg-black py-24 px-4" aria-label="Photo gallery">
+    <section className="bg-black py-24 px-4" aria-label="Galeri foto komunitas lari Bandung Indonesia - Photo gallery">
+      {/* SEO: komunitas lari bandung, komunitas lari indonesia, running community photos */}
       <div className="container mx-auto">
         <div className="mb-16 flex justify-between items-end">
           <div className="overflow-hidden">
-            <h2 className="sr-only">Visuals Gallery</h2>
+            <h2 className="sr-only">Galeri Visual Komunitas Lari Bandung - Visuals Gallery</h2>
             <TextReveal text="VISUALS" className="text-5xl md:text-9xl font-['Syne'] font-black uppercase text-white leading-none tracking-tighter" />
           </div>
           <div className="hidden md:block font-['Syne'] text-white/50 text-right max-w-xs text-sm">
@@ -208,7 +227,7 @@ const Gallery = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4" role="list">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4" role="list" aria-label="Foto-foto komunitas lari Bandung">
           <div role="listitem">
             <FeatureCard title="Night Crawlers" img={IMAGES.community_1} index={0} />
           </div>
@@ -229,9 +248,18 @@ const Gallery = () => {
 
 const LiquidMetalSection = () => {
   return (
-    <section className="py-32 bg-white relative overflow-hidden flex items-center justify-center perspective-1000" aria-label="Call to action">
+    <section 
+      className="py-32 bg-white relative overflow-hidden flex items-center justify-center perspective-1000" 
+      aria-label="Gabung komunitas lari terdekat Bandung Indonesia"
+      id="join"
+    >
+      {/* SEO: komunitas lari, komunitas lari terdekat, komunitas lari bandung, komunitas lari indonesia, les privat olahraga */}
       <div className="absolute inset-0" aria-hidden="true">
-        <ParallaxImage src={IMAGES.neon_reflect} alt="" className="w-full h-full opacity-30 mix-blend-difference grayscale" />
+        <ParallaxImage 
+          src={IMAGES.neon_reflect} 
+          alt="Komunitas lari terdekat Bandung Indonesia - event lari" 
+          className="w-full h-full opacity-30 mix-blend-difference grayscale" 
+        />
       </div>
       
       <div className="container mx-auto px-4 relative z-10 text-center">
@@ -248,7 +276,11 @@ const LiquidMetalSection = () => {
         </Reveal>
         
         <Reveal delay={0.4}>
-          <Button className="bg-black text-white hover:bg-zinc-800 text-base px-8 py-6 md:text-xl md:px-12 md:py-8 rounded-none font-['Syne'] uppercase tracking-widest hover:scale-105 transition-transform duration-300">
+          <Button 
+            className="bg-black text-white hover:bg-zinc-800 text-base px-8 py-6 md:text-xl md:px-12 md:py-8 rounded-none font-['Syne'] uppercase tracking-widest hover:scale-105 transition-transform duration-300"
+            aria-label="Gabung komunitas lari Bandung Indonesia - Join the movement"
+            title="Daftar komunitas lari terdekat Bandung - event lari fun run night run easy run"
+          >
             Join The Movement
           </Button>
         </Reveal>

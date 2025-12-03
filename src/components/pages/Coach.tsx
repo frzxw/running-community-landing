@@ -2,39 +2,45 @@ import React from 'react';
 import { motion } from 'motion/react';
 
 const Coach = () => {
+  // SEO: les privat renang, les privat padel, les privat tenis, les privat bola, les privat futsal, les privat lari, les privat atletik
   const coaches = [
     { 
-        name: "Alex", 
-        role: "Head Coach", 
-        specialty: "Marathon & Triathlon",
-        experience: "10+ Years",
-        img: "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080" 
+        name: "Rina", 
+        role: "Swimming Coach", 
+        specialty: "Les Privat Renang",
+        experience: "8+ Years",
+        img: "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+        altText: "Pelatih les privat renang Bandung Indonesia"
     },
     { 
-        name: "Sarah", 
-        role: "Strength Coach", 
-        specialty: "CrossFit & Conditioning", 
-        experience: "8 Years",
-        img: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080" 
+        name: "Dimas", 
+        role: "Racket Sports Coach", 
+        specialty: "Les Privat Padel & Tenis", 
+        experience: "10 Years",
+        img: "https://images.unsplash.com/photo-1554068865-24cecd4e34b8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+        altText: "Pelatih les privat padel dan les privat tenis Bandung Indonesia"
     },
     { 
-        name: "Marcus", 
-        role: "Performance Coach", 
-        specialty: "Swimming & Recovery", 
-        experience: "6 Years",
-        img: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080" 
-    },
-    { 
-        name: "Jessica", 
-        role: "Yoga Instructor", 
-        specialty: "Flexibility & Mindfulness", 
+        name: "Arif", 
+        role: "Football Coach", 
+        specialty: "Les Privat Bola & Futsal", 
         experience: "12 Years",
-        img: "https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080" 
+        img: "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+        altText: "Pelatih les privat bola dan les privat futsal Bandung Indonesia"
+    },
+    { 
+        name: "Santi", 
+        role: "Athletic Coach", 
+        specialty: "Les Privat Lari & Atletik", 
+        experience: "7 Years",
+        img: "https://images.unsplash.com/photo-1552674605-db6ffd4facb5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+        altText: "Pelatih les privat lari dan les privat atletik Bandung Indonesia"
     },
   ];
 
   return (
-    <div className="pt-32 pb-20 min-h-screen bg-black text-white">
+    <div className="pt-32 pb-20 min-h-screen bg-black text-white" aria-label="Pelatih les privat olahraga Bandung Indonesia">
+      {/* SEO: les privat renang, les privat padel, les privat tenis, les privat bola, les privat futsal, les privat lari, les privat atletik */}
       <div className="container mx-auto px-4">
         <div className="mb-16 text-center">
           <h1 className="text-6xl md:text-9xl font-['Pirata_One'] text-white mb-8 leading-none">
@@ -43,20 +49,34 @@ const Coach = () => {
           <p className="font-['Syne'] text-zinc-500 uppercase tracking-widest text-sm">
             Elevate your game. Any sport. Any level.
           </p>
+          {/* Hidden SEO content */}
+          <p className="sr-only">
+            Tim pelatih profesional Runtastic Bandung untuk les privat olahraga. Tersedia pelatih les privat renang, les privat padel, les privat tenis, les privat bola, les privat futsal, les privat lari, dan les privat atletik. Pelatih berpengalaman di Bandung Indonesia.
+          </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8" role="list" aria-label="Daftar pelatih les privat olahraga Bandung">
           {coaches.map((coach, i) => (
-            <motion.div 
+            <motion.article 
               key={i}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.1 }}
               className="group cursor-pointer"
+              role="listitem"
             >
               <div className="overflow-hidden mb-4 border border-white/10 relative">
-                <div className="absolute inset-0 bg-white/0 group-hover:bg-white/10 transition-colors z-10" />
-                <img src={coach.img} alt={coach.name} className="w-full h-[400px] object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500" />
+                <div className="absolute inset-0 bg-white/0 group-hover:bg-white/10 transition-colors z-10" aria-hidden="true" />
+                <img 
+                  src={coach.img} 
+                  alt={coach.altText} 
+                  title={`${coach.name} - ${coach.specialty} Bandung`}
+                  className="w-full h-[400px] object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500"
+                  loading="lazy"
+                  decoding="async"
+                  width={1080}
+                  height={720}
+                />
               </div>
               <h3 className="text-2xl font-['Syne'] font-bold uppercase">{coach.name}</h3>
               <p className="text-sm font-['Syne'] text-white/80 uppercase tracking-widest mb-1">{coach.role}</p>
@@ -68,7 +88,7 @@ const Coach = () => {
                     {coach.experience}
                   </p>
               </div>
-            </motion.div>
+            </motion.article>
           ))}
         </div>
 
