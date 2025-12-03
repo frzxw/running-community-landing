@@ -1,13 +1,13 @@
 import React from 'react';
 import { Calendar, MapPin } from 'lucide-react';
 
-const EVENTS = [
-  { title: "Sunday Long Run", date: "Every Sunday", time: "05:30 AM", loc: "Senayan Park" },
-  { title: "Track Night", date: "Every Tuesday", time: "19:00 PM", loc: "GBK Stadium" },
-  { title: "Coffee Run", date: "Monthly", time: "06:00 AM", loc: "Common Grounds" },
-];
-
 const Events = () => {
+    const EVENTS = [
+        { title: "Sunday Long Run", date: "Every Sunday", time: "05:30 AM", loc: "Senayan Park" },
+        { title: "Track Night", date: "Every Tuesday", time: "19:00 PM", loc: "GBK Stadium" },
+        { title: "Coffee Run", date: "Monthly", time: "06:00 AM", loc: "Common Grounds" },
+      ];
+      
   return (
     <div className="pt-32 pb-20 min-h-screen bg-black text-white">
       <div className="container mx-auto px-4 max-w-4xl">

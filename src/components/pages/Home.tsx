@@ -41,13 +41,22 @@ const Hero = () => {
   const moveYInverse = useSpring(useTransform(new MotionValue(y), [0, window.innerHeight], [30, -30]), { stiffness: 30, damping: 30 });
 
   return (
-    <section className="relative h-screen w-full overflow-hidden bg-black flex items-center justify-center perspective-1000">
+    <section className="relative h-screen w-full overflow-hidden bg-black flex items-center justify-center perspective-1000" aria-label="Hero section">
       {/* Background Textures - Now using a Day/Mixed shot for broader appeal */}
       <motion.div 
         style={{ x: moveXInverse, y: moveYInverse, scale: 1.15 }}
         className="absolute inset-0 opacity-50"
       >
-         <img src={IMAGES.hero_bg} className="w-full h-full object-cover grayscale contrast-125" alt="texture" />
+         <img 
+           src={IMAGES.hero_bg} 
+           className="w-full h-full object-cover grayscale contrast-125" 
+           alt="" 
+           aria-hidden="true"
+           fetchPriority="high"
+           decoding="async"
+           width={1080}
+           height={720}
+         />
          <div className="absolute inset-0 bg-black/40 mix-blend-multiply" />
       </motion.div>
       
@@ -70,7 +79,7 @@ const Hero = () => {
 
 
       <div className="absolute bottom-10 left-10 flex items-center gap-4">
-        <div className="w-2 h-2 bg-white rounded-full animate-ping" />
+        <div className="w-2 h-2 bg-white rounded-full animate-ping" aria-hidden="true" />
         <span className="font-['Syne'] text-xs uppercase tracking-widest text-white/60">Scroll to join the crew</span>
       </div>
     </section>
@@ -97,13 +106,13 @@ const Marquee = ({ text, direction = 1 }: { text: string, direction?: number }) 
 
 const Manifesto = () => {
   return (
-    <section className="min-h-screen bg-black py-32 px-4 relative overflow-hidden">
+    <section className="min-h-screen bg-black py-32 px-4 relative overflow-hidden" aria-label="Our manifesto">
       <div className="max-w-6xl mx-auto relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
           <div className="col-span-1 md:col-span-4 md:sticky md:top-32">
              <Reveal delay={0.2}>
-               <h3 className="text-white/40 font-['Syne'] uppercase tracking-widest text-sm mb-4">The Creed</h3>
-               <div className="w-full h-[1px] bg-white/20 mb-8" />
+               <h2 className="text-white/40 font-['Syne'] uppercase tracking-widest text-sm mb-4">The Creed</h2>
+               <div className="w-full h-[1px] bg-white/20 mb-8" aria-hidden="true" />
                <p className="font-['Syne'] text-xl text-white leading-relaxed">
                  Sun up or sun down. Rain or shine. Concrete is our sanctuary.
                </p>
@@ -120,7 +129,7 @@ const Manifesto = () => {
             
             <Reveal delay={0.4}>
               <p className="text-2xl md:text-4xl font-['Syne'] font-bold uppercase text-zinc-500 leading-[1.1] mb-12 ml-0 md:ml-12">
-                NOT JUST A NIGHT CREW. <br/> WE OWN EVERY HOUR.
+              NOT JUST A GROUP. <br/> WE ARE THE MOVEMENT.
               </p>
             </Reveal>
 
@@ -132,35 +141,39 @@ const Manifesto = () => {
             </div>
 
             <Reveal delay={0.6}>
-              <div className="flex gap-8 mt-24 items-center group cursor-pointer hover:translate-x-4 transition-transform duration-300">
-                <div className="w-16 h-16 border border-white rounded-full flex items-center justify-center group-hover:bg-white group-hover:text-black transition-colors duration-300">
+              <a 
+                href="#join" 
+                className="flex gap-8 mt-24 items-center group cursor-pointer hover:translate-x-4 transition-transform duration-300"
+                aria-label="Join the Runtastic movement"
+              >
+                <div className="w-16 h-16 border border-white rounded-full flex items-center justify-center group-hover:bg-white group-hover:text-black transition-colors duration-300" aria-hidden="true">
                   <ArrowRight className="w-6 h-6" />
                 </div>
                 <span className="text-2xl font-['Syne'] uppercase text-white">Join the movement</span>
-              </div>
+              </a>
             </Reveal>
           </div>
         </div>
       </div>
       
       {/* Decorative elements */}
-      <div className="absolute top-1/3 -right-24 w-96 h-96 bg-gradient-to-b from-zinc-800 to-transparent rounded-full blur-3xl opacity-10 animate-pulse" />
+      <div className="absolute top-1/3 -right-24 w-96 h-96 bg-gradient-to-b from-zinc-800 to-transparent rounded-full blur-3xl opacity-10 animate-pulse" aria-hidden="true" />
     </section>
   );
 };
 
 const FeatureCard = ({ title, img, index }: { title: string, img: string, index: number }) => {
   return (
-    <motion.div 
+    <motion.article 
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.1, duration: 0.8 }}
       viewport={{ once: true, margin: "-10%" }}
       className="group relative h-[60vh] w-full overflow-hidden border border-white/10 bg-[#0a0a0a]"
     >
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/90 z-20 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/90 z-20 pointer-events-none" aria-hidden="true" />
       
-      <ParallaxImage src={img} alt={title} className="w-full h-full grayscale group-hover:grayscale-0 transition-all duration-700" />
+      <ParallaxImage src={img} alt={`Runtastic ${title} - Running community photo`} className="w-full h-full grayscale group-hover:grayscale-0 transition-all duration-700" />
       
       <div className="absolute bottom-0 left-0 right-0 p-4 md:p-8 z-30">
         <div className="flex justify-between items-end border-t border-white/20 pt-6 overflow-hidden">
@@ -172,19 +185,20 @@ const FeatureCard = ({ title, img, index }: { title: string, img: string, index:
           >
             {title}
           </motion.h3>
-          <span className="font-['Syne'] text-xs text-white/60 uppercase tracking-widest">0{index + 1} // Explore</span>
+          <span className="font-['Syne'] text-xs text-white/60 uppercase tracking-widest" aria-hidden="true">0{index + 1} // Explore</span>
         </div>
       </div>
-    </motion.div>
+    </motion.article>
   );
 };
 
 const Gallery = () => {
   return (
-    <section className="bg-black py-24 px-4">
+    <section className="bg-black py-24 px-4" aria-label="Photo gallery">
       <div className="container mx-auto">
         <div className="mb-16 flex justify-between items-end">
           <div className="overflow-hidden">
+            <h2 className="sr-only">Visuals Gallery</h2>
             <TextReveal text="VISUALS" className="text-5xl md:text-9xl font-['Syne'] font-black uppercase text-white leading-none tracking-tighter" />
           </div>
           <div className="hidden md:block font-['Syne'] text-white/50 text-right max-w-xs text-sm">
@@ -194,15 +208,19 @@ const Gallery = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <FeatureCard title="Night Crawlers" img={IMAGES.community_1} index={0} />
-          <div className="md:col-span-2">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4" role="list">
+          <div role="listitem">
+            <FeatureCard title="Night Crawlers" img={IMAGES.community_1} index={0} />
+          </div>
+          <div className="md:col-span-2" role="listitem">
             <FeatureCard title="Day Breakers" img={IMAGES.stretch_crew} index={1} />
           </div>
-          <div className="md:col-span-2">
+          <div className="md:col-span-2" role="listitem">
              <FeatureCard title="Crew Love" img={IMAGES.community_2} index={2} />
           </div>
-          <FeatureCard title="Impact" img={IMAGES.shoes_urban} index={3} />
+          <div role="listitem">
+            <FeatureCard title="Impact" img={IMAGES.shoes_urban} index={3} />
+          </div>
         </div>
       </div>
     </section>
@@ -211,9 +229,9 @@ const Gallery = () => {
 
 const LiquidMetalSection = () => {
   return (
-    <section className="py-32 bg-white relative overflow-hidden flex items-center justify-center perspective-1000">
-      <div className="absolute inset-0">
-        <ParallaxImage src={IMAGES.neon_reflect} alt="background" className="w-full h-full opacity-30 mix-blend-difference grayscale" />
+    <section className="py-32 bg-white relative overflow-hidden flex items-center justify-center perspective-1000" aria-label="Call to action">
+      <div className="absolute inset-0" aria-hidden="true">
+        <ParallaxImage src={IMAGES.neon_reflect} alt="" className="w-full h-full opacity-30 mix-blend-difference grayscale" />
       </div>
       
       <div className="container mx-auto px-4 relative z-10 text-center">

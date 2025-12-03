@@ -25,43 +25,61 @@ const Navigation = ({ page, setPage }: { page: string, setPage: (p: string) => v
   const [isOpen, setIsOpen] = React.useState(false);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 px-6 py-6 mix-blend-difference">
-      <div className="flex justify-between items-center max-w-7xl mx-auto">
-        <div 
-          onClick={() => setPage('home')}
+    <header className="fixed top-0 left-0 right-0 z-50 px-6 py-6 mix-blend-difference">
+      <nav className="flex justify-between items-center max-w-7xl mx-auto" aria-label="Main navigation">
+        <a 
+          href="#"
+          onClick={(e) => { e.preventDefault(); setPage('home'); }}
           className="text-2xl font-bold tracking-tighter font-['Syne'] text-white uppercase cursor-pointer hover:scale-105 transition-transform"
+          aria-label="Runtastic - Go to homepage"
         >
-          Runtastic <span className="text-xs align-top opacity-50">®</span>
-        </div>
+          Runtastic <span className="text-xs align-top opacity-50" aria-hidden="true">®</span>
+        </a>
         
-        <div className="hidden md:flex gap-8 text-sm font-['Syne'] uppercase tracking-widest text-white">
+        <div className="hidden md:flex gap-8 text-sm font-['Syne'] uppercase tracking-widest text-white" role="menubar">
           {['Crew', 'Coach', 'Collection', 'Events', 'Services', 'Stories'].map((item) => (
             <button 
               key={item} 
               onClick={() => setPage(item.toLowerCase())}
               className={`hover:line-through decoration-1 underline-offset-4 transition-all uppercase ${page === item.toLowerCase() ? 'line-through decoration-white' : ''}`}
+              role="menuitem"
+              aria-current={page === item.toLowerCase() ? 'page' : undefined}
             >
               {item}
             </button>
           ))}
         </div>
 
-        <button onClick={() => setIsOpen(!isOpen)} className="md:hidden text-white">
-          {isOpen ? <X /> : <Menu />}
+        <button 
+          onClick={() => setIsOpen(!isOpen)} 
+          className="md:hidden text-white"
+          aria-label={isOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={isOpen}
+          aria-controls="mobile-menu"
+        >
+          {isOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
         </button>
-      </div>
+      </nav>
 
       {/* Mobile Menu Overlay */}
       <AnimatePresence>
         {isOpen && (
           <motion.div 
+            id="mobile-menu"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "100vh" }}
             exit={{ opacity: 0, height: 0 }}
             className="absolute top-0 left-0 right-0 bg-black z-40 flex flex-col justify-center items-center gap-8 overflow-hidden"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Mobile navigation menu"
           >
-            <button onClick={() => setIsOpen(false)} className="absolute top-6 right-6 text-white">
-              <X size={32} />
+            <button 
+              onClick={() => setIsOpen(false)} 
+              className="absolute top-6 right-6 text-white"
+              aria-label="Close menu"
+            >
+              <X size={32} aria-hidden="true" />
             </button>
             {['Crew', 'Coach', 'Collection', 'Events', 'Services', 'Stories'].map((item, i) => (
               <motion.button 
@@ -78,7 +96,7 @@ const Navigation = ({ page, setPage }: { page: string, setPage: (p: string) => v
           </motion.div>
         )}
       </AnimatePresence>
-    </nav>
+    </header>
   );
 };
 
@@ -119,7 +137,7 @@ const Footer = ({ setPage }: { setPage: (p: string) => void }) => {
       </div>
       <div className="mt-24 flex flex-col md:flex-row justify-between items-end gap-8 border-t border-white/10 pt-8">
         <div className="font-['Syne'] text-xs text-white/20 uppercase tracking-[0.2em]">
-          © 2025 Runtastic Underground.
+          © 2025 Runtastic Community.
         </div>
         <div className="text-xl md:text-2xl font-['Pirata_One'] text-white uppercase">
           RUN TOGETHER. SWEAT TOGETHER.
@@ -141,8 +159,6 @@ export default function App() {
     <SmoothScroll children={undefined}>
       <style>
         {`
-          @import url('https://fonts.googleapis.com/css2?family=Pirata+One&family=Syne:wght@400;500;700;800&display=swap');
-          
           /* Custom Scrollbar */
           ::-webkit-scrollbar {
             width: 8px;
@@ -163,12 +179,35 @@ export default function App() {
             background-color: #fff;
             color: #000;
           }
+          
+          /* Skip link styles */
+          .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+          }
+          .sr-only.focus\\:not-sr-only:focus {
+            position: absolute;
+            width: auto;
+            height: auto;
+            padding: 0;
+            margin: 0;
+            overflow: visible;
+            clip: auto;
+            white-space: normal;
+          }
         `}
       </style>
       
       <Navigation page={page} setPage={setPage} />
       
-      <main>
+      <main id="main-content">
         <AnimatePresence mode="wait">
           <motion.div
             key={page}

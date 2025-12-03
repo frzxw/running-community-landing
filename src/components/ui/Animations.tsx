@@ -84,7 +84,7 @@ export const TextReveal = ({ text, className = "" }: { text: string, className?:
   );
 };
 
-export const ParallaxImage = ({ src, alt, className, speed = 1 }: { src: string, alt: string, className?: string, speed?: number }) => {
+export const ParallaxImage = ({ src, alt, className, speed = 1, loading = "lazy" }: { src: string, alt: string, className?: string, speed?: number, loading?: "lazy" | "eager" }) => {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -97,7 +97,15 @@ export const ParallaxImage = ({ src, alt, className, speed = 1 }: { src: string,
   return (
     <div ref={ref} className={`overflow-hidden ${className}`}>
       <motion.div style={{ y, scale }} className="w-full h-[120%] -mt-[10%]">
-        <img src={src} alt={alt} className="w-full h-full object-cover" />
+        <img 
+          src={src} 
+          alt={alt} 
+          className="w-full h-full object-cover" 
+          loading={loading}
+          decoding="async"
+          width={1080}
+          height={720}
+        />
       </motion.div>
     </div>
   );
