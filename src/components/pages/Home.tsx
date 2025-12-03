@@ -107,7 +107,7 @@ const Marquee = ({ text, direction = 1 }: { text: string, direction?: number }) 
         transition={{ ease: "linear", duration: 20, repeat: Infinity }}
       >
         {[...Array(4)].map((_, i) => (
-          <span key={i} className="text-6xl md:text-8xl font-['Syne'] font-black uppercase tracking-tighter italic opacity-90">
+          <span key={i} className="text-4xl md:text-8xl font-['Syne'] font-black uppercase tracking-tighter italic opacity-90">
             {text} <span className="inline-block w-12 h-1 bg-black align-middle mx-4" />
           </span>
         ))}
@@ -183,13 +183,13 @@ const FeatureCard = ({ title, img, index }: { title: string, img: string, index:
       
       <ParallaxImage src={img} alt={title} className="w-full h-full grayscale group-hover:grayscale-0 transition-all duration-700" />
       
-      <div className="absolute bottom-0 left-0 right-0 p-8 z-30">
+      <div className="absolute bottom-0 left-0 right-0 p-4 md:p-8 z-30">
         <div className="flex justify-between items-end border-t border-white/20 pt-6 overflow-hidden">
           <motion.h3 
             initial={{ y: "100%" }}
             whileInView={{ y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-4xl font-['Syne'] font-bold uppercase text-white tracking-tighter"
+            className="text-2xl md:text-4xl font-['Syne'] font-bold uppercase text-white tracking-tighter"
           >
             {title}
           </motion.h3>
@@ -206,7 +206,7 @@ const Gallery = () => {
       <div className="container mx-auto">
         <div className="mb-16 flex justify-between items-end">
           <div className="overflow-hidden">
-            <TextReveal text="VISUALS" className="text-6xl md:text-9xl font-['Syne'] font-black uppercase text-white leading-none tracking-tighter" />
+            <TextReveal text="VISUALS" className="text-5xl md:text-9xl font-['Syne'] font-black uppercase text-white leading-none tracking-tighter" />
           </div>
           <div className="hidden md:block font-['Syne'] text-white/50 text-right max-w-xs text-sm">
              <Reveal delay={0.3}>
@@ -239,7 +239,7 @@ const LiquidMetalSection = () => {
       
       <div className="container mx-auto px-4 relative z-10 text-center">
         <Reveal>
-          <h2 className="text-black text-5xl md:text-8xl font-['Syne'] font-black uppercase tracking-tighter mb-8">
+          <h2 className="text-black text-4xl md:text-8xl font-['Syne'] font-black uppercase tracking-tighter mb-8">
             Forged in <span className="text-transparent bg-clip-text bg-gradient-to-r from-zinc-700 via-zinc-500 to-black">Iron</span>
           </h2>
         </Reveal>
@@ -251,7 +251,7 @@ const LiquidMetalSection = () => {
         </Reveal>
         
         <Reveal delay={0.4}>
-          <Button className="bg-black text-white hover:bg-zinc-800 text-xl px-12 py-8 rounded-none font-['Syne'] uppercase tracking-widest hover:scale-105 transition-transform duration-300">
+          <Button className="bg-black text-white hover:bg-zinc-800 text-base px-8 py-6 md:text-xl md:px-12 md:py-8 rounded-none font-['Syne'] uppercase tracking-widest hover:scale-105 transition-transform duration-300">
             Join The Movement
           </Button>
         </Reveal>

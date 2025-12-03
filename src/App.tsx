@@ -68,7 +68,7 @@ const Navigation = ({ page, setPage }: { page: string, setPage: (p: string) => v
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: i * 0.1 + 0.2 }}
                 onClick={() => { setPage(item.toLowerCase()); setIsOpen(false); }}
-                className="text-5xl font-['Syne'] font-bold text-white uppercase tracking-widest"
+                className="text-3xl font-['Syne'] font-bold text-white uppercase tracking-widest"
               >
                 {item}
               </motion.button>
