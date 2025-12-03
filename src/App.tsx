@@ -188,7 +188,7 @@ export default function App() {
   }, [page]);
 
   return (
-    <SmoothScroll children={undefined}>
+    <SmoothScroll>
       <style>
         {`
           /* Custom Scrollbar */
