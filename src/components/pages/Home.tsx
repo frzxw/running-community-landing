@@ -68,27 +68,6 @@ const Hero = () => {
         </motion.div>
       </div>
 
-      {/* Floating Detail Element - Sweat/Grime */}
-      <motion.div 
-        style={{ y: y1, x: moveXInverse, rotate: -6 }}
-        className="absolute bottom-32 right-4 md:right-32 z-20 hidden md:block"
-      >
-        <motion.div
-          initial={{ opacity: 0, y: 100, rotate: 10 }}
-          animate={{ opacity: 1, y: 0, rotate: -6 }}
-          transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
-          className="relative"
-        >
-          <img 
-            src={IMAGES.sweat_detail} 
-            alt="Sweat detail" 
-            className="w-64 h-64 object-cover rounded-full grayscale contrast-150 border-2 border-white/20 shadow-2xl"
-          />
-          <div className="absolute -top-6 -left-6 bg-white text-black border border-black px-4 py-2 font-['Syne'] text-xs uppercase font-bold tracking-widest">
-            Based in Bandung
-          </div>
-        </motion.div>
-      </motion.div>
 
       <div className="absolute bottom-10 left-10 flex items-center gap-4">
         <div className="w-2 h-2 bg-white rounded-full animate-ping" />

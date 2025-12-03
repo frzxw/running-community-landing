@@ -12,11 +12,13 @@ const Collection = () => {
   return (
     <div className="pt-32 pb-20 min-h-screen bg-black text-white">
       <div className="container mx-auto px-4">
-        <div className="flex justify-between items-end mb-16">
-          <h1 className="text-6xl md:text-8xl font-['Syne'] font-black uppercase tracking-tighter italic">
-            DROP 001
+        <div className="mb-16 text-center">
+          <h1 className="text-6xl md:text-9xl font-['Pirata_One'] text-white mb-8 leading-none">
+            COLLECTION
           </h1>
-          <span className="font-['Pirata_One'] text-xl text-zinc-500">SOLD OUT SOON</span>
+          <p className="font-['Syne'] text-zinc-500 uppercase tracking-widest text-sm">
+            Limited drops. Exclusive gear.
+          </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

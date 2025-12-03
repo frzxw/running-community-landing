@@ -36,9 +36,14 @@ const Coach = () => {
   return (
     <div className="pt-32 pb-20 min-h-screen bg-black text-white">
       <div className="container mx-auto px-4">
-        <h1 className="text-6xl md:text-9xl font-['Pirata_One'] text-white mb-16 text-center leading-none">
-          THE COACHES
-        </h1>
+        <div className="mb-16 text-center">
+          <h1 className="text-6xl md:text-9xl font-['Pirata_One'] text-white mb-8 leading-none">
+            THE COACHES
+          </h1>
+          <p className="font-['Syne'] text-zinc-500 uppercase tracking-widest text-sm">
+            Elevate your game. Any sport. Any level.
+          </p>
+        </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {coaches.map((coach, i) => (
@@ -51,7 +56,7 @@ const Coach = () => {
             >
               <div className="overflow-hidden mb-4 border border-white/10 relative">
                 <div className="absolute inset-0 bg-white/0 group-hover:bg-white/10 transition-colors z-10" />
-                <img src={coach.img} alt={coach.name} className="w-full h-[400px] object-cover grayscale group-hover:scale-105 transition-transform duration-500" />
+                <img src={coach.img} alt={coach.name} className="w-full h-[400px] object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500" />
               </div>
               <h3 className="text-2xl font-['Syne'] font-bold uppercase">{coach.name}</h3>
               <p className="text-sm font-['Syne'] text-white/80 uppercase tracking-widest mb-1">{coach.role}</p>

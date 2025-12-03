@@ -1,25 +1,27 @@
 import React from 'react';
 import { Calendar, MapPin } from 'lucide-react';
 
-const Community = () => {
-  const events = [
-    { title: "Sunday Long Run", date: "Every Sunday", time: "05:30 AM", loc: "Senayan Park" },
-    { title: "Track Night", date: "Every Tuesday", time: "19:00 PM", loc: "GBK Stadium" },
-    { title: "Coffee Run", date: "Monthly", time: "06:00 AM", loc: "Common Grounds" },
-  ];
+const EVENTS = [
+  { title: "Sunday Long Run", date: "Every Sunday", time: "05:30 AM", loc: "Senayan Park" },
+  { title: "Track Night", date: "Every Tuesday", time: "19:00 PM", loc: "GBK Stadium" },
+  { title: "Coffee Run", date: "Monthly", time: "06:00 AM", loc: "Common Grounds" },
+];
 
+const Events = () => {
   return (
     <div className="pt-32 pb-20 min-h-screen bg-black text-white">
       <div className="container mx-auto px-4 max-w-4xl">
-        <h1 className="text-6xl md:text-9xl font-['Pirata_One'] text-white mb-16 text-center leading-none">
-          SCHEDULE
-        </h1>
-        <p className="text-center font-['Syne'] text-zinc-500 uppercase tracking-widest mb-20">
-          Show up. Keep up.
-        </p>
+        <div className="mb-16 text-center">
+          <h1 className="text-6xl md:text-9xl font-['Pirata_One'] text-white mb-8 leading-none">
+            EVENTS
+          </h1>
+          <p className="font-['Syne'] text-zinc-500 uppercase tracking-widest text-sm">
+            Show up. Keep up.
+          </p>
+        </div>
 
         <div className="space-y-4">
-          {events.map((event, i) => (
+          {EVENTS.map((event, i) => (
             <div key={i} className="border border-white/10 p-8 hover:bg-white/5 transition-colors flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
               <div>
                 <h3 className="text-3xl font-['Syne'] font-bold uppercase mb-2">{event.title}</h3>
@@ -47,4 +49,5 @@ const Community = () => {
   );
 };
 
-export default Community;
+export default Events;
+

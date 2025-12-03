@@ -5,13 +5,23 @@ const Privacy = () => {
   return (
     <div className="pt-32 pb-20 min-h-screen bg-black text-white">
       <div className="container mx-auto px-4 max-w-4xl">
-        <motion.h1 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-6xl md:text-8xl font-['Syne'] font-black uppercase tracking-tighter mb-16"
-        >
-          PRIVACY<br/>POLICY
-        </motion.h1>
+        <div className="mb-16 text-center">
+          <motion.h1 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-5xl md:text-9xl font-['Pirata_One'] text-white mb-8 leading-none"
+          >
+            PRIVACY POLICY
+          </motion.h1>
+          <motion.p 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.1 }}
+            className="font-['Syne'] text-zinc-500 uppercase tracking-widest text-sm"
+          >
+            Your data. Your privacy. Protected.
+          </motion.p>
+        </div>
 
         <motion.div 
           initial={{ opacity: 0 }}

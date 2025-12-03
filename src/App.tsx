@@ -7,7 +7,8 @@ import Home from './components/pages/Home';
 import Crew from './components/pages/Crew';
 import Coach from './components/pages/Coach';
 import Collection from './components/pages/Collection';
-import Community from './components/pages/Community';
+import Events from './components/pages/Events';
+import Services from './components/pages/Services';
 import Stories from './components/pages/Stories';
 import Privacy from './components/pages/Privacy';
 import Terms from './components/pages/Terms';
@@ -34,7 +35,7 @@ const Navigation = ({ page, setPage }: { page: string, setPage: (p: string) => v
         </div>
         
         <div className="hidden md:flex gap-8 text-sm font-['Syne'] uppercase tracking-widest text-white">
-          {['Crew', 'Coach', 'Collection', 'Community', 'Stories'].map((item) => (
+          {['Crew', 'Coach', 'Collection', 'Events', 'Services', 'Stories'].map((item) => (
             <button 
               key={item} 
               onClick={() => setPage(item.toLowerCase())}
@@ -62,7 +63,7 @@ const Navigation = ({ page, setPage }: { page: string, setPage: (p: string) => v
             <button onClick={() => setIsOpen(false)} className="absolute top-6 right-6 text-white">
               <X size={32} />
             </button>
-            {['Crew', 'Coach', 'Collection', 'Community', 'Stories'].map((item, i) => (
+            {['Crew', 'Coach', 'Collection', 'Events', 'Services', 'Stories'].map((item, i) => (
               <motion.button 
                 key={item} 
                 initial={{ y: 50, opacity: 0 }}
@@ -105,8 +106,9 @@ const Footer = ({ setPage }: { setPage: (p: string) => void }) => {
             <button onClick={() => setPage('crew')} className="text-left hover:underline hover:text-zinc-300 transition-colors">Crew</button>
             <button onClick={() => setPage('coach')} className="text-left hover:underline hover:text-zinc-300 transition-colors">Coach</button>
             <button onClick={() => setPage('collection')} className="text-left hover:underline hover:text-zinc-300 transition-colors">Shop</button>
+            <button onClick={() => setPage('events')} className="text-left hover:underline hover:text-zinc-300 transition-colors">Events</button>
+            <button onClick={() => setPage('services')} className="text-left hover:underline hover:text-zinc-300 transition-colors">Services</button>
             <button onClick={() => setPage('stories')} className="text-left hover:underline hover:text-zinc-300 transition-colors">Stories</button>
-            <button onClick={() => setPage('community')} className="text-left hover:underline hover:text-zinc-300 transition-colors">Events</button>
           </div>
           <div className="flex flex-col gap-4">
             <span className="text-white/40 mb-2">Legal</span>
@@ -179,7 +181,8 @@ export default function App() {
             {page === 'crew' && <Crew />}
             {page === 'coach' && <Coach />}
             {page === 'collection' && <Collection />}
-            {page === 'community' && <Community />}
+            {page === 'events' && <Events />}
+            {page === 'services' && <Services />}
             {page === 'stories' && <Stories />}
             {page === 'privacy' && <Privacy />}
             {page === 'terms' && <Terms />}
