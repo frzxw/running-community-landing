@@ -1,0 +1,50 @@
+import React from 'react';
+import { Calendar, MapPin } from 'lucide-react';
+
+const Community = () => {
+  const events = [
+    { title: "Sunday Long Run", date: "Every Sunday", time: "05:30 AM", loc: "Senayan Park" },
+    { title: "Track Night", date: "Every Tuesday", time: "19:00 PM", loc: "GBK Stadium" },
+    { title: "Coffee Run", date: "Monthly", time: "06:00 AM", loc: "Common Grounds" },
+  ];
+
+  return (
+    <div className="pt-32 pb-20 min-h-screen bg-black text-white">
+      <div className="container mx-auto px-4 max-w-4xl">
+        <h1 className="text-6xl md:text-9xl font-['Pirata_One'] text-white mb-16 text-center leading-none">
+          SCHEDULE
+        </h1>
+        <p className="text-center font-['Syne'] text-zinc-500 uppercase tracking-widest mb-20">
+          Show up. Keep up.
+        </p>
+
+        <div className="space-y-4">
+          {events.map((event, i) => (
+            <div key={i} className="border border-white/10 p-8 hover:bg-white/5 transition-colors flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+              <div>
+                <h3 className="text-3xl font-['Syne'] font-bold uppercase mb-2">{event.title}</h3>
+                <div className="flex gap-6 text-zinc-400 font-['Syne'] text-sm uppercase tracking-wider">
+                  <span className="flex items-center gap-2"><Calendar size={14}/> {event.date} // {event.time}</span>
+                  <span className="flex items-center gap-2"><MapPin size={14}/> {event.loc}</span>
+                </div>
+              </div>
+              <button className="px-8 py-3 border border-white text-white font-['Syne'] uppercase hover:bg-white hover:text-black transition-all">
+                RSVP
+              </button>
+            </div>
+          ))}
+        </div>
+        
+        <div className="mt-32 p-12 bg-[#111] border border-white/10 text-center">
+          <h3 className="text-3xl font-['Pirata_One'] mb-6">JOIN THE WHATSAPP GROUP</h3>
+          <p className="font-['Syne'] text-zinc-500 mb-8">Get live updates, drop locations, and banter.</p>
+          <button className="bg-white text-black px-8 py-4 font-['Syne'] font-bold uppercase tracking-widest hover:bg-zinc-200">
+            Join Chat
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Community;
