@@ -1,13 +1,12 @@
-import React, { useRef } from 'react';
-import { motion, useScroll, useTransform, useSpring, useInView } from 'motion/react';
+import React, { useRef, type PropsWithChildren } from 'react';
+import { motion, useScroll, useTransform, useInView } from 'motion/react';
 
-interface RevealProps {
-  children: React.ReactNode;
+interface RevealProps extends PropsWithChildren {
   width?: "fit-content" | "100%";
   delay?: number;
 }
 
-export const Reveal = ({ children, width = "fit-content", delay = 0 }: RevealProps) => {
+export const Reveal: React.FC<RevealProps> = ({ children, width = "fit-content", delay = 0 }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
 
