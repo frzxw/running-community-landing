@@ -68,10 +68,19 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     
-    <!-- Preconnect to external domains for faster font loading -->
+    <!-- DNS Prefetch and Preconnect for faster loading -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+    <link rel="dns-prefetch" href="https://images.unsplash.com" />
+    <link rel="dns-prefetch" href="https://vitals.vercel-insights.com" />
+    <link rel="dns-prefetch" href="https://va.vercel-scripts.com" />
+    
+    <!-- Preconnect to external domains for faster resource loading -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preconnect" href="https://images.unsplash.com" />
+    <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+    <link rel="preconnect" href="https://vitals.vercel-insights.com" crossorigin />
+    <link rel="preconnect" href="https://va.vercel-scripts.com" crossorigin />
     
     <!-- Preload critical fonts with font-display: swap -->
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Pirata+One&family=Syne:wght@400;500;700;800&display=swap" />
