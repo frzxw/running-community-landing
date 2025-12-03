@@ -31,7 +31,7 @@ const Collection = () => {
               <div className="bg-[#111] h-[500px] relative mb-6 overflow-hidden border border-white/10">
                 <img src={product.img} alt={product.name} className="w-full h-full object-cover grayscale contrast-125 group-hover:grayscale-0 transition-all duration-500" />
                 <div className="absolute bottom-0 left-0 right-0 p-4 bg-black/80 translate-y-full group-hover:translate-y-0 transition-transform">
-                  <Button className="w-full bg-white text-black hover:bg-zinc-200 font-['Syne'] uppercase">Add to Cart</Button>
+                  <Button className="w-full bg-white text-black hover:bg-zinc-200 font-['Syne'] uppercase">Buy Now</Button>
                 </div>
               </div>
               <div className="flex justify-between items-start">

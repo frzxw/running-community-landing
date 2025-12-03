@@ -57,13 +57,13 @@ const Hero = () => {
           initial={{ opacity: 0, scale: 0.8, filter: "blur(10px)" }}
           animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
           transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
-          className="text-center relative mix-blend-difference w-full"
+          className="text-left relative mix-blend-difference w-full"
         >
           <motion.h1 
             style={{ x: moveX, y: moveY }}
-            className="text-[18vw] leading-[0.8] font-['Syne'] font-black text-white tracking-tighter select-none uppercase italic drop-shadow-[0_0_30px_rgba(255,255,255,0.3)]"
+            className="text-3xl md:text-7xl lg:text-9xl leading-[0.8] font-['Syne'] font-black text-white tracking-tighter select-none uppercase italic drop-shadow-[0_0_30px_rgba(255,255,255,0.3)]"
           >
-            RUN<br/>TASTIC
+            RUN TOGETHER.<br/>SWEAT TOGETHER.
           </motion.h1>
         </motion.div>
       </div>
@@ -85,7 +85,7 @@ const Hero = () => {
             className="w-64 h-64 object-cover rounded-full grayscale contrast-150 border-2 border-white/20 shadow-2xl"
           />
           <div className="absolute -top-6 -left-6 bg-white text-black border border-black px-4 py-2 font-['Syne'] text-xs uppercase font-bold tracking-widest">
-            Anytime // Anyplace
+            Based in Bandung
           </div>
         </motion.div>
       </motion.div>
@@ -126,7 +126,7 @@ const Manifesto = () => {
                <h3 className="text-white/40 font-['Syne'] uppercase tracking-widest text-sm mb-4">The Creed</h3>
                <div className="w-full h-[1px] bg-white/20 mb-8" />
                <p className="font-['Syne'] text-xl text-white leading-relaxed">
-                 Sun up or sun down. Rain or shine. Concrete is our church.
+                 Sun up or sun down. Rain or shine. Concrete is our sanctuary.
                </p>
              </Reveal>
           </div>
@@ -264,10 +264,10 @@ const Home = () => {
   return (
     <>
       <Hero />
-      <Marquee text="#DONOTFINISH // ONE CREW // ONE PACE // ONE MOVEMENT" direction={1} />
+      <Marquee text="#DONOTFINISH // #DONOTFINISH // #DONOTFINISH // #DONOTFINISH // #DONOTFINISH // #DONOTFINISH // " direction={1} />
       <Manifesto />
       <Gallery />
-      <Marquee text="#DONOTFINISH // ONE CREW // ONE PACE // ONE MOVEMENT" direction={-1} />
+      <Marquee text="ONE CREW // ONE PACE // ONE MOVEMENT // ONE CREW // ONE PACE // ONE MOVEMENT // " direction={-1} />
       <LiquidMetalSection />
     </>
   );
