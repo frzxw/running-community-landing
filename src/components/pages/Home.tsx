@@ -35,11 +35,11 @@ const Hero = () => {
   const { x, y } = useMousePosition();
   const y1 = useTransform(scrollY, [0, 500], [0, 200]);
   
-  // Smoother mouse interaction
-  const moveX = useSpring(useTransform(new MotionValue(x), [0, window.innerWidth], [-30, 30]), { stiffness: 30, damping: 30 });
-  const moveY = useSpring(useTransform(new MotionValue(y), [0, window.innerHeight], [-30, 30]), { stiffness: 30, damping: 30 });
-  const moveXInverse = useSpring(useTransform(new MotionValue(x), [0, window.innerWidth], [30, -30]), { stiffness: 30, damping: 30 });
-  const moveYInverse = useSpring(useTransform(new MotionValue(y), [0, window.innerHeight], [30, -30]), { stiffness: 30, damping: 30 });
+  // Smoother mouse interaction - reduced movement range for subtle parallax
+  const moveX = useSpring(useTransform(new MotionValue(x), [0, window.innerWidth], [-8, 8]), { stiffness: 50, damping: 50 });
+  const moveY = useSpring(useTransform(new MotionValue(y), [0, window.innerHeight], [-8, 8]), { stiffness: 50, damping: 50 });
+  const moveXInverse = useSpring(useTransform(new MotionValue(x), [0, window.innerWidth], [8, -8]), { stiffness: 50, damping: 50 });
+  const moveYInverse = useSpring(useTransform(new MotionValue(y), [0, window.innerHeight], [8, -8]), { stiffness: 50, damping: 50 });
 
   return (
     <section className="relative h-screen w-full overflow-hidden bg-black flex items-center justify-center perspective-1000" aria-label="Komunitas lari Bandung Indonesia - Hero section">
@@ -65,8 +65,8 @@ const Hero = () => {
       {/* Text Content */}
       <div className="relative z-10 container mx-auto px-4 flex flex-col items-center justify-center h-full pointer-events-none">
         <motion.div 
-          initial={{ opacity: 0, scale: 0.8, x: 40}}
-          animate={{ opacity: 1, scale: 1}}
+          initial={{ opacity: 0, scale: 0.8, x: 20}}
+          animate={{ opacity: 1, scale: 1, x: 0}}
           transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
           className="text-left relative w-full"
         >
@@ -76,13 +76,21 @@ const Hero = () => {
           >
             RUN TOGETHER.<br/>SWEAT TOGETHER.
           </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="mt-12 md:mt-16 text-sm md:text-xl lg:text-2xl font-['Syne'] font-normal text-white/80 tracking-wider max-w-2xl"
+          >
+            Bandung's Leading Running Community<br className="md:hidden" /> with Private Coaching.
+          </motion.p>
         </motion.div>
       </div>
 
 
-      <div className="absolute bottom-10 left-10 flex items-center gap-4">
-        <div className="w-2 h-2 bg-white rounded-full animate-ping" aria-hidden="true" />
-        <span className="font-['Syne'] text-xs uppercase tracking-widest text-zinc-400">Scroll to join the crew</span>
+      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex items-center gap-4 md:gap-6">
+        <div className="w-2 h-2 md:w-3 md:h-3 bg-white rounded-full animate-ping" aria-hidden="true" />
+        <span className="font-['Syne'] text-xs md:text-xl lg:text-2xl uppercase tracking-widest text-white/90 md:text-white font-medium">Scroll to join the crew</span>
       </div>
     </section>
   );
@@ -228,7 +236,7 @@ const Gallery = () => {
         <div className="mb-16 flex justify-between items-end">
           <div className="overflow-hidden">
             <h2 className="sr-only">Galeri Visual Komunitas Lari Bandung - Visuals Gallery</h2>
-            <TextReveal text="VISUALS" className="text-5xl md:text-9xl font-['Syne'] font-black uppercase text-white leading-none tracking-tighter" />
+            <TextReveal text="VISUALS" className="text-4xl md:text-8xl font-['Syne'] font-black uppercase text-white leading-none tracking-tighter" />
           </div>
           <div className="hidden md:block font-['Syne'] text-zinc-400 text-right max-w-xs text-sm">
              <Reveal delay={0.3}>
