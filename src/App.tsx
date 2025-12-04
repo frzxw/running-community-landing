@@ -12,6 +12,7 @@ const Collection = lazy(() => import('./components/pages/Collection'));
 const Events = lazy(() => import('./components/pages/Events'));
 const Services = lazy(() => import('./components/pages/Services'));
 const Stories = lazy(() => import('./components/pages/Stories'));
+const StoryDetail = lazy(() => import('./components/pages/StoryDetail'));
 const Privacy = lazy(() => import('./components/pages/Privacy'));
 const Terms = lazy(() => import('./components/pages/Terms'));
 
@@ -54,17 +55,20 @@ const Navigation = ({ page, setPage }: { page: string, setPage: (p: string) => v
         </a>
         
         <div className="hidden md:flex gap-8 text-sm font-['Syne'] uppercase tracking-widest text-white" role="menubar">
-          {['Crew', 'Coach', 'Collection', 'Events', 'Services', 'Stories'].map((item) => (
-            <button 
-              key={item} 
-              onClick={() => setPage(item.toLowerCase())}
-              className={`hover:line-through decoration-1 underline-offset-4 transition-all uppercase ${page === item.toLowerCase() ? 'line-through decoration-white' : ''}`}
-              role="menuitem"
-              aria-current={page === item.toLowerCase() ? 'page' : undefined}
-            >
-              {item}
-            </button>
-          ))}
+          {['Crew', 'Coach', 'Collection', 'Events', 'Services', 'Stories'].map((item) => {
+            const isActive = page === item.toLowerCase() || (item === 'Stories' && page.startsWith('stories/'));
+            return (
+              <button 
+                key={item} 
+                onClick={() => setPage(item.toLowerCase())}
+                className={`hover:line-through decoration-1 underline-offset-4 transition-all uppercase ${isActive ? 'line-through decoration-white' : ''}`}
+                role="menuitem"
+                aria-current={isActive ? 'page' : undefined}
+              >
+                {item}
+              </button>
+            );
+          })}
         </div>
 
         <button 
@@ -196,12 +200,20 @@ export default function App() {
     if (path === '/' || path === '') return 'home';
     // Remove leading slash and return the page name
     const pageName = path.slice(1).toLowerCase();
+    // Check if it's a story slug (stories/slug-name)
+    if (pageName.startsWith('stories/')) {
+      return pageName; // Return full path like "stories/why-we-run-jakarta-chapter"
+    }
     // Validate page name exists
     const validPages = ['home', 'crew', 'coach', 'collection', 'events', 'services', 'stories', 'privacy', 'terms'];
     return validPages.includes(pageName) ? pageName : 'home';
   };
 
   const [page, setPage] = useState(getPageFromUrl());
+  
+  // Extract story slug if page is a story detail page
+  const storySlug = page.startsWith('stories/') ? page.replace('stories/', '') : null;
+  const isStoryDetail = storySlug !== null;
 
   // Update URL when page changes
   useEffect(() => {
@@ -295,7 +307,8 @@ export default function App() {
               {page === 'collection' && <Collection />}
               {page === 'events' && <Events />}
               {page === 'services' && <Services />}
-              {page === 'stories' && <Stories />}
+              {isStoryDetail && storySlug && <StoryDetail slug={storySlug} setPage={setPage} />}
+              {page === 'stories' && !isStoryDetail && <Stories setPage={setPage} />}
               {page === 'privacy' && <Privacy />}
               {page === 'terms' && <Terms />}
             </Suspense>
