@@ -1,6 +1,44 @@
-import React from 'react';
-import { motion } from 'motion/react';
+import React, { useRef } from 'react';
+import { motion, useInView } from 'motion/react';
 import { Button } from '../ui/button';
+import { useIsMobile } from '../ui/use-mobile';
+
+interface Product {
+  name: string;
+  price: string;
+  img: string;
+}
+
+const ProductCard = ({ product, index }: { product: Product; index: number }) => {
+  const cardRef = useRef(null);
+  const isInView = useInView(cardRef, { once: false, margin: "-20%" });
+  const isMobile = useIsMobile();
+  
+  const imageClassName = isMobile 
+    ? `w-full h-full object-cover contrast-125 ${isInView ? 'grayscale-0' : 'grayscale'} transition-all duration-500`
+    : 'w-full h-full object-cover grayscale contrast-125 group-hover:grayscale-0 transition-all duration-500';
+  
+  return (
+    <motion.div 
+      ref={cardRef}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: index * 0.2 }}
+      className="group"
+    >
+      <div className="bg-[#111] h-[500px] relative mb-6 overflow-hidden border border-white/10">
+        <img src={product.img} alt={product.name} className={imageClassName} />
+        <div className="absolute bottom-0 left-0 right-0 p-4 bg-black/80 translate-y-full group-hover:translate-y-0 transition-transform">
+          <Button className="w-full bg-white text-black hover:bg-zinc-200 font-['Syne'] uppercase">Buy Now</Button>
+        </div>
+      </div>
+      <div className="flex justify-between items-start">
+        <h3 className="text-xl font-['Syne'] font-bold uppercase">{product.name}</h3>
+        <span className="text-lg font-['Syne'] text-zinc-400">{product.price}</span>
+      </div>
+    </motion.div>
+  );
+};
 
 const Collection = () => {
   const products = [
@@ -23,24 +61,7 @@ const Collection = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {products.map((product, i) => (
-            <motion.div 
-              key={i}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: i * 0.2 }}
-              className="group"
-            >
-              <div className="bg-[#111] h-[500px] relative mb-6 overflow-hidden border border-white/10">
-                <img src={product.img} alt={product.name} className="w-full h-full object-cover grayscale contrast-125 group-hover:grayscale-0 transition-all duration-500" />
-                <div className="absolute bottom-0 left-0 right-0 p-4 bg-black/80 translate-y-full group-hover:translate-y-0 transition-transform">
-                  <Button className="w-full bg-white text-black hover:bg-zinc-200 font-['Syne'] uppercase">Buy Now</Button>
-                </div>
-              </div>
-              <div className="flex justify-between items-start">
-                <h3 className="text-xl font-['Syne'] font-bold uppercase">{product.name}</h3>
-                <span className="text-lg font-['Syne'] text-zinc-400">{product.price}</span>
-              </div>
-            </motion.div>
+            <ProductCard key={i} product={product} index={i} />
           ))}
         </div>
       </div>

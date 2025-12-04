@@ -1,9 +1,18 @@
-import React from 'react';
-import { motion } from 'motion/react';
+import { useRef } from 'react';
+import { motion, useInView } from 'motion/react';
 import { ParallaxImage } from '../ui/Animations';
+import { useIsMobile } from '../ui/use-mobile';
 
 // SEO: les privat renang, les privat padel, les privat tenis, les privat bola, les privat futsal, les privat lari, les privat atletik
-const SERVICES = [
+interface Service {
+  title: string;
+  description: string;
+  img: string;
+  altText: string;
+  titleAttr: string;
+}
+
+const SERVICES: Service[] = [
   {
     title: "Swimming",
     description: "Private coaching for open water & competitive swimming. Master buoyancy, stroke efficiency, and speed.",
@@ -34,6 +43,53 @@ const SERVICES = [
   }
 ];
 
+const ServiceCard = ({ service, index }: { service: Service; index: number }) => {
+  const cardRef = useRef(null);
+  const isInView = useInView(cardRef, { once: false, margin: "-20%" });
+  const isMobile = useIsMobile();
+  
+  const imageClassName = isMobile 
+    ? `w-full h-full ${isInView ? 'grayscale-0' : 'grayscale'} transition-all duration-700 object-cover`
+    : 'w-full h-full grayscale group-hover:grayscale-0 transition-all duration-700 object-cover';
+  
+  return (
+    <motion.article
+      ref={cardRef}
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ delay: index * 0.1, duration: 0.8 }}
+      viewport={{ once: true }}
+      className="group relative h-[60vh] overflow-hidden border border-white/10 bg-zinc-900"
+      role="listitem"
+    >
+      <ParallaxImage 
+        src={service.img} 
+        alt={service.altText} 
+        className={imageClassName} 
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-90 group-hover:opacity-80 transition-opacity duration-500" aria-hidden="true" />
+      
+      <div className="absolute bottom-0 left-0 p-8 z-20">
+        <div className="overflow-hidden">
+          <h3 
+            className="text-3xl md:text-5xl font-['Syne'] font-bold uppercase mb-4 italic text-white drop-shadow-lg transform translate-y-0 transition-transform duration-500"
+            title={service.titleAttr}
+          >
+            {service.title}
+          </h3>
+        </div>
+        <p className="text-sm md:text-base font-['Syne'] text-zinc-300 max-w-sm leading-relaxed opacity-80 group-hover:opacity-100 transition-opacity duration-500">
+          {service.description}
+        </p>
+      </div>
+      
+      <div className="absolute top-8 right-8 z-20 opacity-50 group-hover:opacity-100 transition-opacity duration-500" aria-hidden="true">
+        <span className="text-4xl font-['Pirata_One'] text-white">0{index + 1}</span>
+      </div>
+    </motion.article>
+  );
+};
+
 const Services = () => {
   return (
     <div className="pt-32 pb-20 min-h-screen bg-black text-white" aria-label="Les privat olahraga Bandung Indonesia">
@@ -54,40 +110,7 @@ const Services = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-32" role="list" aria-label="Daftar layanan private sports training">
           {SERVICES.map((service, i) => (
-            <motion.article
-              key={i}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.1, duration: 0.8 }}
-              viewport={{ once: true }}
-              className="group relative h-[60vh] overflow-hidden border border-white/10 bg-zinc-900"
-              role="listitem"
-            >
-              <ParallaxImage 
-                src={service.img} 
-                alt={service.altText} 
-                className="w-full h-full grayscale group-hover:grayscale-0 transition-all duration-700 object-cover" 
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-90 group-hover:opacity-80 transition-opacity duration-500" aria-hidden="true" />
-              
-              <div className="absolute bottom-0 left-0 p-8 z-20">
-                <div className="overflow-hidden">
-                    <h3 
-                      className="text-3xl md:text-5xl font-['Syne'] font-bold uppercase mb-4 italic text-white drop-shadow-lg transform translate-y-0 transition-transform duration-500"
-                      title={service.titleAttr}
-                    >
-                        {service.title}
-                    </h3>
-                </div>
-                <p className="text-sm md:text-base font-['Syne'] text-zinc-300 max-w-sm leading-relaxed opacity-80 group-hover:opacity-100 transition-opacity duration-500">
-                  {service.description}
-                </p>
-              </div>
-              
-              <div className="absolute top-8 right-8 z-20 opacity-50 group-hover:opacity-100 transition-opacity duration-500" aria-hidden="true">
-                <span className="text-4xl font-['Pirata_One'] text-white">0{i + 1}</span>
-              </div>
-            </motion.article>
+            <ServiceCard key={i} service={service} index={i} />
           ))}
         </div>
 

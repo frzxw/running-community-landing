@@ -1,6 +1,17 @@
-import React from 'react';
+import { useRef } from 'react';
+import { useInView } from 'motion/react';
+import { useIsMobile } from '../ui/use-mobile';
 
-const ARTICLES = [
+interface Article {
+  category: string;
+  date: string;
+  title: string;
+  description: string;
+  img: string;
+  offset: boolean;
+}
+
+const ARTICLES: Article[] = [
   {
     category: "Editorials",
     date: "Dec 02, 2025",
@@ -19,6 +30,35 @@ const ARTICLES = [
   }
 ];
 
+const ArticleCard = ({ article }: { article: Article }) => {
+  const cardRef = useRef(null);
+  const isInView = useInView(cardRef, { once: false, margin: "-20%" });
+  const isMobile = useIsMobile();
+  
+  const imageClassName = isMobile 
+    ? `w-full h-full object-cover ${isInView ? 'grayscale-0 scale-105' : 'grayscale'} transition-all duration-700`
+    : 'w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700';
+  
+  return (
+    <article ref={cardRef} className={`group cursor-pointer ${article.offset ? 'md:mt-32' : ''}`}>
+      <div className="aspect-[4/3] overflow-hidden mb-6">
+        <img src={article.img} className={imageClassName} alt={article.title} />
+      </div>
+      <div className="flex gap-4 text-xs font-['Syne'] uppercase tracking-widest text-zinc-500 mb-3">
+        <span>{article.category}</span>
+        <span>//</span>
+        <span>{article.date}</span>
+      </div>
+      <h2 className="text-3xl font-['Pirata_One'] mb-4 group-hover:underline decoration-1 underline-offset-4">
+        {article.title}
+      </h2>
+      <p className="font-['Syne'] text-zinc-400 leading-relaxed line-clamp-3">
+        {article.description}
+      </p>
+    </article>
+  );
+};
+
 const Stories = () => {
   return (
     <div className="pt-32 pb-20 min-h-screen bg-black text-white">
@@ -34,22 +74,7 @@ const Stories = () => {
          
          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
            {ARTICLES.map((article, i) => (
-             <article key={i} className={`group cursor-pointer ${article.offset ? 'md:mt-32' : ''}`}>
-               <div className="aspect-[4/3] overflow-hidden mb-6">
-                 <img src={article.img} className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" alt={article.title} />
-               </div>
-               <div className="flex gap-4 text-xs font-['Syne'] uppercase tracking-widest text-zinc-500 mb-3">
-                 <span>{article.category}</span>
-                 <span>//</span>
-                 <span>{article.date}</span>
-               </div>
-               <h2 className="text-3xl font-['Pirata_One'] mb-4 group-hover:underline decoration-1 underline-offset-4">
-                 {article.title}
-               </h2>
-               <p className="font-['Syne'] text-zinc-400 leading-relaxed line-clamp-3">
-                 {article.description}
-               </p>
-             </article>
+             <ArticleCard key={i} article={article} />
            ))}
          </div>
       </div>

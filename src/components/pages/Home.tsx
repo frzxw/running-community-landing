@@ -1,8 +1,9 @@
 import React, { useEffect, useRef } from 'react';
-import { motion, useScroll, useTransform, useSpring, MotionValue } from 'motion/react';
+import { motion, useScroll, useTransform, useSpring, MotionValue, useInView } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
 import { Button } from '../ui/button';
 import { Reveal, TextReveal, ParallaxImage } from '../ui/Animations';
+import { useIsMobile } from '../ui/use-mobile';
 
 // Updated Images to include day/mixed scenes
 const IMAGES = {
@@ -176,9 +177,18 @@ const INDONESIAN_ALT_TEXT: { [key: string]: string } = {
 
 const FeatureCard = ({ title, img, index }: { title: string, img: string, index: number }) => {
   const indonesianAlt = INDONESIAN_ALT_TEXT[title] || `Komunitas lari ${title} - Runtastic Bandung Indonesia`;
+  const cardRef = useRef(null);
+  const isInView = useInView(cardRef, { once: false, margin: "-20%" });
+  const isMobile = useIsMobile();
+  
+  // On mobile: use scroll-based color effect, on desktop: use hover effect
+  const imageClassName = isMobile 
+    ? `w-full h-full ${isInView ? 'grayscale-0' : 'grayscale'} transition-all duration-700`
+    : 'w-full h-full grayscale group-hover:grayscale-0 transition-all duration-700';
   
   return (
     <motion.article 
+      ref={cardRef}
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.1, duration: 0.8 }}
@@ -190,7 +200,7 @@ const FeatureCard = ({ title, img, index }: { title: string, img: string, index:
       <ParallaxImage 
         src={img} 
         alt={indonesianAlt}
-        className="w-full h-full grayscale group-hover:grayscale-0 transition-all duration-700" 
+        className={imageClassName} 
       />
       
       <div className="absolute bottom-0 left-0 right-0 p-4 md:p-8 z-30">

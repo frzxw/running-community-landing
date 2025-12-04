@@ -133,6 +133,8 @@ const Footer = ({ setPage }: { setPage: (p: string) => void }) => {
           <div className="flex gap-6">
              <a 
                href="https://www.instagram.com/runtasstic/" 
+               target="_blank"
+               rel="noopener noreferrer"
                className="font-['Syne'] uppercase text-sm tracking-widest text-white hover:text-zinc-300 transition-colors flex items-center gap-2 group"
                aria-label="Instagram komunitas lari Bandung"
                title="Follow komunitas lari Bandung di Instagram"
@@ -141,6 +143,8 @@ const Footer = ({ setPage }: { setPage: (p: string) => void }) => {
              </a>
              <a 
                href="https://www.tiktok.com/@runtasstic" 
+               target="_blank"
+               rel="noopener noreferrer"
                className="font-['Syne'] uppercase text-sm tracking-widest text-white hover:text-zinc-300 transition-colors flex items-center gap-2 group"
                aria-label="TikTok komunitas lari Indonesia"
                title="Follow komunitas lari Indonesia di TikTok"
