@@ -132,7 +132,7 @@ const Footer = ({ setPage }: { setPage: (p: string) => void }) => {
           </h2>
           <div className="flex gap-6">
              <a 
-               href="#" 
+               href="https://www.instagram.com/runtasstic/" 
                className="font-['Syne'] uppercase text-sm tracking-widest text-white hover:text-zinc-300 transition-colors flex items-center gap-2 group"
                aria-label="Instagram komunitas lari Bandung"
                title="Follow komunitas lari Bandung di Instagram"
@@ -140,7 +140,7 @@ const Footer = ({ setPage }: { setPage: (p: string) => void }) => {
                Instagram <span className="text-[10px] group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform" aria-hidden="true">↗</span>
              </a>
              <a 
-               href="#" 
+               href="https://www.tiktok.com/@runtasstic" 
                className="font-['Syne'] uppercase text-sm tracking-widest text-white hover:text-zinc-300 transition-colors flex items-center gap-2 group"
                aria-label="TikTok komunitas lari Indonesia"
                title="Follow komunitas lari Indonesia di TikTok"
