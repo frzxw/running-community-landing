@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import { motion, useInView } from 'motion/react';
 import { useIsMobile } from '../ui/use-mobile';
+import { OptimizedImage } from '../ui/OptimizedImage';
 
 interface CrewMember {
   name: string;
@@ -27,7 +28,12 @@ const CrewCard = ({ member, index }: { member: CrewMember; index: number }) => {
     >
       <div className="overflow-hidden mb-4 border border-white/10 relative">
         <div className="absolute inset-0 bg-white/0 group-hover:bg-white/10 transition-colors z-10" />
-        <img src={member.img} alt={member.name} className={imageClassName} />
+        <OptimizedImage
+          src={member.img}
+          alt={member.name}
+          preset="card"
+          className={imageClassName}
+        />
       </div>
       <h3 className="text-2xl font-['Syne'] font-bold uppercase">{member.name}</h3>
       <p className="text-sm font-['Syne'] text-zinc-500 uppercase tracking-widest">{member.role}</p>

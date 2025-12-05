@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import { useInView } from 'motion/react';
 import { useIsMobile } from '../ui/use-mobile';
+import { OptimizedImage } from '../ui/OptimizedImage';
 
 // Export ARTICLES and Article interface for use in StoryDetail
 export interface Article {
@@ -59,7 +60,12 @@ const ArticleCard = ({ article, onNavigate }: { article: Article; onNavigate: (s
       aria-label={`Read article: ${article.title}`}
     >
       <div className="aspect-[4/3] overflow-hidden mb-6">
-        <img src={article.img} className={imageClassName} alt={article.title} />
+        <OptimizedImage
+          src={article.img}
+          alt={article.title}
+          preset="card"
+          className={imageClassName}
+        />
       </div>
       <div className="flex gap-4 text-xs font-['Syne'] uppercase tracking-widest text-zinc-500 mb-3">
         <span>{article.category}</span>

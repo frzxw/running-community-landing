@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import { motion, useInView } from 'motion/react';
 import { Button } from '../ui/button';
 import { useIsMobile } from '../ui/use-mobile';
+import { OptimizedImage } from '../ui/OptimizedImage';
 
 interface Product {
   name: string;
@@ -27,7 +28,12 @@ const ProductCard = ({ product, index }: { product: Product; index: number }) =>
       className="group"
     >
       <div className="bg-[#111] h-[500px] relative mb-6 overflow-hidden border border-white/10">
-        <img src={product.img} alt={product.name} className={imageClassName} />
+        <OptimizedImage
+          src={product.img}
+          alt={product.name}
+          preset="card"
+          className={imageClassName}
+        />
         <div className="absolute bottom-0 left-0 right-0 p-4 bg-black/80 translate-y-full group-hover:translate-y-0 transition-transform">
           <Button className="w-full bg-white text-black hover:bg-zinc-200 font-['Syne'] uppercase">Buy Now</Button>
         </div>

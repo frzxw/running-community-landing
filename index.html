@@ -89,8 +89,9 @@
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pirata+One&family=Syne:wght@400;500;700;800&display=swap" />
     </noscript>
     
-    <!-- Preload LCP image (hero background) -->
-    <link rel="preload" as="image" href="https://images.unsplash.com/photo-1758506971661-33fe941ca1e2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080" fetchpriority="high" />
+    <!-- Preload LCP image (hero background) - Mobile optimized -->
+    <link rel="preload" as="image" href="https://images.unsplash.com/photo-1758506971661-33fe941ca1e2?w=640&q=75&fm=webp&fit=crop&auto=format" fetchpriority="high" media="(max-width: 640px)" />
+    <link rel="preload" as="image" href="https://images.unsplash.com/photo-1758506971661-33fe941ca1e2?w=1024&q=80&fm=webp&fit=crop&auto=format" fetchpriority="high" media="(min-width: 641px)" />
     
     <!-- JSON-LD Structured Data for Indonesian SEO -->
     <script type="application/ld+json">

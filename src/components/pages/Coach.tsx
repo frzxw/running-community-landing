@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import { motion, useInView } from 'motion/react';
 import { useIsMobile } from '../ui/use-mobile';
+import { OptimizedImage } from '../ui/OptimizedImage';
 
 interface Coach {
   name: string;
@@ -31,15 +32,12 @@ const CoachCard = ({ coach, index }: { coach: Coach; index: number }) => {
     >
       <div className="overflow-hidden mb-4 border border-white/10 relative">
         <div className="absolute inset-0 bg-white/0 group-hover:bg-white/10 transition-colors z-10" aria-hidden="true" />
-        <img 
-          src={coach.img} 
-          alt={coach.altText} 
+        <OptimizedImage
+          src={coach.img}
+          alt={coach.altText}
           title={`${coach.name} - ${coach.specialty} Bandung`}
+          preset="card"
           className={imageClassName}
-          loading="lazy"
-          decoding="async"
-          width={1080}
-          height={720}
         />
       </div>
       <h3 className="text-2xl font-['Syne'] font-bold uppercase">{coach.name}</h3>

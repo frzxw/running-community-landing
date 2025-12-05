@@ -4,6 +4,7 @@ import { ArrowRight } from 'lucide-react';
 import { Button } from '../ui/button';
 import { Reveal, TextReveal, ParallaxImage } from '../ui/Animations';
 import { useIsMobile } from '../ui/use-mobile';
+import { OptimizedImage } from '../ui/OptimizedImage';
 
 // Updated Images to include day/mixed scenes
 const IMAGES = {
@@ -49,15 +50,13 @@ const Hero = () => {
         style={{ x: moveXInverse, y: moveYInverse, scale: 1.15 }}
         className="absolute inset-0 opacity-50"
       >
-         <img 
-           src={IMAGES.hero_bg} 
-           className="w-full h-full object-cover grayscale contrast-125" 
-           alt="Komunitas lari Bandung Indonesia - pelari sprint di jalan kota" 
+         <OptimizedImage
+           src={IMAGES.hero_bg}
+           alt="Komunitas lari Bandung Indonesia - pelari sprint di jalan kota"
            title="Komunitas lari terdekat Bandung - urban running community"
-           fetchPriority="high"
-           decoding="async"
-           width={1080}
-           height={720}
+           preset="hero"
+           priority={true}
+           className="w-full h-full object-cover grayscale contrast-125"
          />
          <div className="absolute inset-0 bg-black/40 mix-blend-multiply" />
       </motion.div>

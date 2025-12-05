@@ -1,5 +1,6 @@
 import React, { useRef, type PropsWithChildren } from 'react';
 import { motion, useScroll, useTransform, useInView } from 'motion/react';
+import { OptimizedImage } from './OptimizedImage';
 
 interface RevealProps extends PropsWithChildren {
   width?: "fit-content" | "100%";
@@ -48,7 +49,7 @@ export const TextReveal = ({ text, className = "" }: { text: string, className?:
       y: 0,
       rotate: 0,
       transition: {
-        type: "spring",
+        type: "spring" as const,
         damping: 12,
         stiffness: 100,
       },
@@ -58,7 +59,7 @@ export const TextReveal = ({ text, className = "" }: { text: string, className?:
       y: 20,
       rotate: 5,
       transition: {
-        type: "spring",
+        type: "spring" as const,
         damping: 12,
         stiffness: 100,
       },
@@ -83,7 +84,7 @@ export const TextReveal = ({ text, className = "" }: { text: string, className?:
   );
 };
 
-export const ParallaxImage = ({ src, alt, className, speed = 1, loading = "lazy" }: { src: string, alt: string, className?: string, speed?: number, loading?: "lazy" | "eager" }) => {
+export const ParallaxImage = ({ src, alt, className, loading = "lazy" }: { src: string, alt: string, className?: string, loading?: "lazy" | "eager" }) => {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -96,14 +97,12 @@ export const ParallaxImage = ({ src, alt, className, speed = 1, loading = "lazy"
   return (
     <div ref={ref} className={`overflow-hidden ${className}`}>
       <motion.div style={{ y, scale }} className="w-full h-[120%] -mt-[10%]">
-        <img 
-          src={src} 
-          alt={alt} 
-          className="w-full h-full object-cover" 
-          loading={loading}
-          decoding="async"
-          width={1080}
-          height={720}
+        <OptimizedImage
+          src={src}
+          alt={alt}
+          preset="gallery"
+          priority={loading === "eager"}
+          className="w-full h-full object-cover"
         />
       </motion.div>
     </div>

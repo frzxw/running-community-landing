@@ -3,6 +3,7 @@ import { motion, useInView } from 'motion/react';
 import { ArrowLeft } from 'lucide-react';
 import { ARTICLES } from './Stories';
 import { useIsMobile } from '../ui/use-mobile';
+import { OptimizedImage } from '../ui/OptimizedImage';
 
 interface StoryDetailProps {
   slug: string;
@@ -78,9 +79,10 @@ const StoryDetail = ({ slug, setPage }: StoryDetailProps) => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="aspect-[4/3] md:aspect-[21/9] overflow-hidden mb-12 group"
           >
-            <img
+            <OptimizedImage
               src={article.img}
               alt={article.title}
+              preset="full"
               className={`w-full h-full object-cover transition-all duration-700 ${
                 isMobile 
                   ? `${isInView ? 'grayscale-0 scale-105' : 'grayscale'}`
