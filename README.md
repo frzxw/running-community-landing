@@ -2,7 +2,9 @@
 
 Marketing site for an urban running community: manifesto, weekly runs, coaching, crew, merchandise and member stories.
 
-Live at [running-community-landing.vercel.app](https://runtastic-landing.vercel.app).
+Live at [runtastic-landing.vercel.app](https://runtastic-landing.vercel.app).
+
+![Running community home page](docs/preview.png)
 
 ## What is on it
 
